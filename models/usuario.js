@@ -5,6 +5,10 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
+    edad: {
+        type: Number,
+        required: [true, 'La edad es obligatoria']
+    },
     correo: {
         type: String,
         required: [true, 'El correo es obligatorio' ],
@@ -14,21 +18,17 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, 'El password es obligatorio' ]
     },
-    img: {
-        type: String
+    identificacion: {
+        type: String,
+        required: [true, 'La identificacion es obligatoria' ]
     },
     rol: {
         type: String,
         required: true,
-        //enum: ['ADMIN_ROLE', 'USER_ROLE']
     },
     estado: {
         type: Boolean,
         default: true
-    },
-    google: {
-        type: Boolean,
-        default: false
     },
 });
 
