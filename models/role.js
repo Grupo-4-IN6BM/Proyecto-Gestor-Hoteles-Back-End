@@ -1,3 +1,4 @@
+//Comentario de prueba
 const { Schema, model } = require('mongoose');
 
 const RoleSchema = Schema({
