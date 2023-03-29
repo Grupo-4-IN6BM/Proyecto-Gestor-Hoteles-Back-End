@@ -11,10 +11,11 @@ class Server {
         this.port = process.env.PORT;
 
         this.paths = {
-            // cuentas:       '/api/cuentas',
-            // eventos:     '/api/eventos',
-            // facturas: '/api/facturas',
-            // habitaciones:   '/api/habitaciones',
+            auth: '/api/auth',
+            detalle_cuenta: '/api/detalle_cuenta',
+             eventos:     '/api/eventos',
+            //  facturas: '/api/facturas'
+            //   habitaciones:   '/api/habitaciones',
             // reservaciones:  '/api/reservaciones',
             // servicios:   '/api/servicios',
             usuarios:   '/api/usuarios',
@@ -53,11 +54,12 @@ class Server {
 
 
     routes() {
-        // this.app.use(this.paths.cuentas , require('../routes/detalle-cuenta'));
-        // this.app.use(this.paths.eventos , require('../routes/evento'));
-        // this.app.use(this.paths.facturas, require('../routes/factura'));
-        // this.app.use(this.paths.habitaciones, require('../routes/habitacion'));
-        // this.app.use(this.paths.reservaciones, require('../routes/reservacion'));
+        this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.detalle_cuenta , require('../routes/detalle-cuenta'));
+        this.app.use(this.paths.eventos , require('../routes/evento'));
+        //  this.app.use(this.paths.facturas, require('../routes/factura'));
+        this.app.use(this.paths.habitaciones, require('../routes/habitacion'));
+        //  this.app.use(this.paths.reservaciones, require('../routes/reservacion'));
         // this.app.use(this.paths.servicios, require('../routes/servicio'));
         // this.app.use(this.paths.eventos, require('../routes/tipo-evento'));
         this.app.use(this.paths.usuarios, require('../routes/usuario'));
