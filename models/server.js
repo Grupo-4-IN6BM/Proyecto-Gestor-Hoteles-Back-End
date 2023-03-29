@@ -20,8 +20,6 @@ class Server {
             // servicios:   '/api/servicios',
             usuarios:   '/api/usuarios',
         }
-
-
         //Conectar a base de datos
         this.conectarDB();
 

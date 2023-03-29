@@ -7,7 +7,6 @@ const { validarJWT } = require('../middlewares/validar-jwt');
 
 
 const router = Router();
-
 router.get('/mostrar', getUsuarios);
 
 router.post('/agregarUsuario', [

@@ -9,7 +9,6 @@ const Detalle_cuentaSchema = Schema({
     habitaciones: [{
          type: Schema.Types.ObjectId,
         ref: 'Habitacion',
-
      }],
     eventos: [{
         type: Schema.Types.ObjectId,

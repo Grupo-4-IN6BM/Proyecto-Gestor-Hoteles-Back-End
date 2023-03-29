@@ -32,5 +32,4 @@ const UsuarioSchema = Schema({
     },
 });
 
-
 module.exports = model('Usuario', UsuarioSchema);

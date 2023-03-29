@@ -11,7 +11,6 @@ const validarJWT = async( req = request, res= response, next ) => {
             msg: 'No hay token en la petición'
         })
     }
-
     
     try {
         const { uid } = jwt.verify( token, process.env.SECRET_KEY_FOR_TOKEN);

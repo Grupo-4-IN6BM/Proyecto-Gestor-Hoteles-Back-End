@@ -17,7 +17,6 @@ const coleccionesPermitidas = [
 const buscarUsuarios = async( termino = '', res = response) => {
 
     const esMongoID = ObjectId.isValid( termino );  //TRUE
-
     if ( esMongoID ) {
         const usuario = await Usuario.findById(termino);
         return res.json({

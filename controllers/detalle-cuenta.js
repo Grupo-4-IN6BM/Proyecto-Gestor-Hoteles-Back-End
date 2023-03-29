@@ -11,14 +11,11 @@ const getDetalle_cuenta = async (req = request, res = response) => {
     Detalle_cuenta.countDocuments(query),
     Detalle_cuenta.find(query).populate("usuario", "nombre").populate('eventos')
   ]);
-
   res.json({
     msg: "get Api - Controlador Detalle_cuenta",
     listaCarritos: listadetalle_cuenta,
   });
 };
-
-
 const postDetalle_cuenta = async (req = request, res = response) => {
   const { eventos } = req.body;
   let cantidad = 1;

@@ -11,7 +11,6 @@ const getUsuarios = async (req = request, res = response) => {
         Usuario.countDocuments(query),
         Usuario.find(query)
     ]);
-
     res.json({
         msg: 'get Api - Controlador Usuario',
         listaUsuarios
