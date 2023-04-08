@@ -11,7 +11,6 @@ class Server {
         this.port = process.env.PORT;
 
         this.paths = {
-            auth: '/api/auth',
             // cuentas:       '/api/cuentas',
             // eventos:     '/api/eventos',
             // facturas: '/api/facturas',
@@ -54,7 +53,6 @@ class Server {
 
 
     routes() {
-        this.app.use(this.paths.auth, require('../routes/auth'));
         // this.app.use(this.paths.cuentas , require('../routes/detalle-cuenta'));
         // this.app.use(this.paths.eventos , require('../routes/evento'));
         // this.app.use(this.paths.facturas, require('../routes/factura'));

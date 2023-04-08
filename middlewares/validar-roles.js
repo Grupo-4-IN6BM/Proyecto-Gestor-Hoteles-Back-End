@@ -18,26 +18,7 @@ const tieneRole = ( ...roles ) => {
     }
 }
 
-const esAdminRole = (req = request, res = response, next) => {
-    //Si no viene el usuario    
-    if (!req.usuario) {
-        return res.status(500).json({
-            msg: 'Se requiere verificar el role sin validar el token primero'
-        });
-    }
-    //Verificar que el rol sea ADMIN_ROLE    
-    const { rol, nombre } = req.usuario;
-    if (rol !== 'ADMIN_ROLE') {
-        return res.status(500).json({
-            msg: `${nombre} no es administrador - No tiene acceso a esta funcion`
-        });
-        
-    }
-    next();
-}
-
 
 module.exports = {
     tieneRole,
-    esAdminRole
 }
