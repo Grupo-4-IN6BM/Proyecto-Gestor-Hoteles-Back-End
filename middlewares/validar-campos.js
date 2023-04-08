@@ -9,7 +9,6 @@ const validarCampos = ( req = request, res = response, next ) => {
     //Next sirve para seguir ejecutando el middleware
     next();
 }
-
 module.exports = {
     validarCampos
 }

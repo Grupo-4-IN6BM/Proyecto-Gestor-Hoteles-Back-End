@@ -18,7 +18,6 @@ const tieneRole = ( ...roles ) => {
     }
 }
 
-
 module.exports = {
     tieneRole,
 }
