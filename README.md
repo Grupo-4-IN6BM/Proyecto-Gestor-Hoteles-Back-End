@@ -1,4 +1,4 @@
-#PROYECTO GESTOR DE HOTELES(MERN)
+# PROYECTO GESTOR DE HOTELES(MERN)
 
 Renombrar el archivo example.env a .env
 
