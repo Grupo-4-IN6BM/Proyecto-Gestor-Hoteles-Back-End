@@ -1,12 +1,11 @@
 const { response, request } = require('express');
-const bcrypt = require('bcryptjs');
 //Importación del modelo
 const Evento = require('../models/evento');
-
+const Hotel = require('../models/hotel');
 
 const getEventos = async (req = request, res = response) => {
 
-  const query = { estado: true };
+  const query = { disponibilidad: true };
 
   const listaEventos = await Promise.all([
     Evento.countDocuments(query),
@@ -21,12 +20,14 @@ const getEventos = async (req = request, res = response) => {
 
 
 const postEvento = async (req = request, res = response) => {
-
-  //Desestructuración
-  const { nombre, horaInicio, horaFinal, descripcion, tipo, precio } = req.body;
-  const eventoGuardadoDB = new Evento({ nombre, horaInicio, horaFinal, descripcion, tipo, precio });
-
-  //Guardar en BD
+  const id = req.usuario.id;
+  const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio } = req.body;
+  const eventoGuardadoDB = new Evento({ nombre, fechaInicio, fechaFinal, descripcion, tipo, precio });
+  const hotel_id = await Hotel.findOne({ administrador: id });
+  var hotel = hotel_id._id;
+  const hotelGuardaEvento = await Hotel.findByIdAndUpdate(hotel_id._id, {
+    $push: { eventos: [eventoGuardadoDB._id] },
+  });
   await eventoGuardadoDB.save();
 
   res.json({
@@ -44,7 +45,7 @@ const putEvento = async (req = request, res = response) => {
     const { _id, ...resto } = req.body;
     
     //Editar al usuario por el id
-    const eventoEditado = await Evento.findByIdAndUpdate(id, resto);
+    const eventoEditado = await Evento.findByIdAndUpdate(id, resto, {new: true});
 
     res.json({
         msg: 'put Api = Editar evento',
@@ -55,15 +56,18 @@ const putEvento = async (req = request, res = response) => {
 }
 
 const deleteEvento = async (req = request, res = response) => {
-    
+  const id_A = req.usuario.id;
   const {id} = req.params;
-
-  //Eliminando fisicamente de la base de datos
-  const eventoEliminado = await Evento.findByIdAndDelete(id)
-  
+  const eventoEliminado = await Evento.findByIdAndDelete(id, {new: true})
+  const hotel_id = await Hotel.findOne({ administrador: id_A });
+  if (eventoEliminado != null) {
+    const hotelEliminarHabitacion = await Hotel.findByIdAndUpdate(
+      hotel_id._id,
+      { $pull: { eventos: eventoEliminado._id } }
+    );
+  }
   
   res.json({
-      msg: 'delete Api = eliminando Evento',
       eventoEliminado
   })
 }
@@ -76,4 +80,3 @@ module.exports = {
   putEvento,
   deleteEvento
 }
-

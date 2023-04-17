@@ -1,7 +1,7 @@
-
 const {response, request} = require('express');
 
 const Habitacion = require('../models/habitacion');
+const Hotel = require('../models/hotel');
 
 const getHabitaciones = async (req = request, res = response) => {
 
@@ -10,7 +10,7 @@ const getHabitaciones = async (req = request, res = response) => {
 
     const listaHabitaciones = await Promise.all([
         Habitacion.countDocuments(query),
-        Habitacion.find(query)
+        Habitacion.find(query).populate('hotel', 'nombre')
     ]);
 
     res.json({
@@ -18,12 +18,21 @@ const getHabitaciones = async (req = request, res = response) => {
     });
 
 }
+const getHabitacionesPorId = async (req = request, res = response) => {
+    const {id} = req.params;
+    const hotelId = await Habitacion.findById(id).populate('hotel', 'nombre')
+    res.status(201).json(hotelId);
+
+}
 const postHabitacion = async (req = request, res = response) => {
-    const { numero, disponibilidad, costo} = req.body;
-    const habitacionGuardadaDB = new Habitacion({ numero, disponibilidad, costo });
-
+    const id = req.usuario.id
+    const { numero, costo, descripcion, capacidad, ...resto} = req.body;
+    const hotel_id = await Hotel.findOne({administrador: id});
+    var hotel = hotel_id._id;
+    const habitacionGuardadaDB = new Habitacion({numero, costo, hotel, descripcion, capacidad, ...resto});
+    const hotelGuardaHabitacion = await Hotel.findByIdAndUpdate(hotel_id._id, {$push:{habitaciones: [habitacionGuardadaDB._id]}})
     await habitacionGuardadaDB.save();
-
+    
     res.json({
         habitacionGuardadaDB
     });
@@ -45,48 +54,22 @@ const putHabitacion = async (req = request, res = response) => {
 
 const deleteHabitacion = async(req = request, res = response) => {
     const { id } = req.params;
-  
+    const id_A = req.usuario.id
     const habitacionEliminada = await Habitacion.findByIdAndDelete(id, {new: true});
+    const hotel_id = await Hotel.findOne({administrador: id_A});
+    if(habitacionEliminada != null){
+        const hotelEliminarHabitacion = await Hotel.findByIdAndUpdate(hotel_id._id, {$pull:{habitaciones: habitacionEliminada._id}})
+    }
     res.json({
         msg: 'DELETE eliminar user',
         habitacionEliminada
     });
 }
 
-const putAdmin = async (req = request, res = response) => {
-    const idAdmin = req.usuario.id;
-    const { _id, img, estado, google, ...resto } = req.body;
-
-    if ( resto.password ) {
-        //Encriptar password
-        const salt = bcrypt.genSaltSync();
-        resto.password = bcrypt.hashSync(resto.password, salt);
-    }
-
-    const usuarioEditado = await Usuario.findByIdAndUpdate(idAdmin, resto, {new: true});
-
-    res.json({
-        msg: 'PUT editar user',
-        usuarioEditado
-    });
-
-}
-
-const deleteAdmin = async(req = request, res = response) => {
-    const idAdmin = req.usuario.id;
-    const { id } = req.params;
-    
-    //Eliminar cambiando el estado a false
-    const usuarioEliminado = await Usuario.findByIdAndUpdate(idAdmin, { estado: false });
-
-    res.json({
-        msg: 'DELETE eliminar user',
-        usuarioEliminado
-    });
-}
 
 module.exports = {
     getHabitaciones,
+    getHabitacionesPorId,
     postHabitacion,
     putHabitacion,
     deleteHabitacion

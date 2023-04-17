@@ -5,18 +5,21 @@ const Usuario = require('../models/usuario');
 const Habitacion = require('../models/habitacion');
 const Evento = require('../models/evento');
 const Servicio = require('../models/servicio');
+const Hotel = require('../models/hotel');
 
 const coleccionesPermitidas = [
     'usuarios',
     'eventos',
     'habitaciones',
     'servicios',
+    'hoteles',
 ];
 
 
 const buscarUsuarios = async( termino = '', res = response) => {
 
     const esMongoID = ObjectId.isValid( termino );  //TRUE
+
     if ( esMongoID ) {
         const usuario = await Usuario.findById(termino);
         return res.json({
@@ -55,7 +58,7 @@ const buscarEventos = async( termino = '', res = response) => {
 
     const eventos = await Evento.find({
         $or: [ { nombre: regex }],
-        $and: [ { estado: true } ]
+        $and: [ { disponibilidad: true } ]
     });
 
     res.json({
@@ -76,9 +79,9 @@ const buscarHabitaciones = async( termino = '', res = response) => {
     } 
     const regex = new RegExp( termino, 'i');
 
-    const habitaciones = await Producto.find({
-        $or: [ { numero: regex } ],
-        $and: [ { estado: true } ]
+    const habitaciones = await Habitacion.find({
+        $or: [ { descripcion: regex } ],
+        $and: [ { disponibilidad: true } ]
     });
 
     res.json({
@@ -111,6 +114,31 @@ const buscarServicios = async( termino = '', res = response) => {
 
 }
 
+const buscarHoteles = async( termino = '', res = response) => {
+
+    const esMongoID = ObjectId.isValid( termino );  //TRUE
+
+    if ( esMongoID ) {
+        const hotel = await Hotel.findById(termino);
+        return res.json({
+            //results: [ usuario ]
+            results: ( hotel ) ? [ hotel ] : [] 
+            //Preugntar si el usuario existe, si no existe regresa un array vacio
+        });
+    }
+    const regex = new RegExp( termino, 'i');
+
+    const hoteles = await Hotel.find({
+        $or: [ { nombre: regex }, { pais: regex } ],
+        $and: [ { estado: true } ]
+    });
+
+    res.json({
+        results: hoteles
+    })
+
+} 
+
 const buscar = (req = request, res = response) => {
 
     const { coleccion, termino } = req.params;
@@ -121,7 +149,6 @@ const buscar = (req = request, res = response) => {
                   Las colecciones permitidas son: ${ coleccionesPermitidas }`
         });
     }
-
 
     switch (coleccion) {
         case 'usuarios':
@@ -135,6 +162,9 @@ const buscar = (req = request, res = response) => {
         break;
         case 'servicios':
             buscarServicios(termino, res);
+        break;
+        case 'hoteles':
+            buscarHoteles(termino, res);
         break;
         default:
             res.status(500).json({
