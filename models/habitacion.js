@@ -12,6 +12,22 @@ const HabitacionSchema = Schema({
     costo: {
         type: Number,
         required: [true, 'El costo es obligatorio']
+    },
+    capacidad: {
+        type: Number,
+        required: [true, 'La capacidad es obligatoria']
+    },
+    hotel:{
+        type: Schema.Types.ObjectId,
+        ref: 'Hotele',
+    },
+    descripcion:{
+        type: String,
+        required: true
+    },
+    img:{
+        type: String,
+        default: 'Sin imagen'
     }
 });
-module.exports = model('Habitacion', HabitacionSchema);
+module.exports = model('Habitacione', HabitacionSchema);

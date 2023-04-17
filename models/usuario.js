@@ -30,6 +30,15 @@ const UsuarioSchema = Schema({
         type: Boolean,
         default: true
     },
+    reservacion:{
+        type: Schema.Types.ObjectId,
+        ref: 'Reservacione',
+    },
+    img:{
+        type: String,
+        default: 'Sin imagen'
+    }
 });
+
 
 module.exports = model('Usuario', UsuarioSchema);

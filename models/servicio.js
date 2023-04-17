@@ -6,13 +6,25 @@ const ServicioSchema = Schema({
         required: [true, 'El nombre es obligatorio']
     },
     precio: {
-        type: String,
+        type: Number,
         required: [true, 'El precio es obligatorio' ],
         unique: true
     },
     estado: {
         type: Boolean,
         default: true
+    },
+    hotel:{
+        type: Schema.Types.ObjectId,
+        ref: 'Hotele',
+    }, 
+    descripcion: {
+        type: String,
+        required: [true, 'La descripcion es obligatoria']
+    },
+    img:{
+        type: String,
+        default: 'Sin imagen'
     }
 });
 

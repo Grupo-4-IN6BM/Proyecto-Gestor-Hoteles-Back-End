@@ -8,16 +8,14 @@ const EventoSchema = Schema({
     tipo: {
         type: String,
         default: ""
-        // // required: [true, 'El correo es obligatorio' ],
-        // unique: true
     },
-    horaInicio: {
+    fechaInicio: {
         type: Date,
-        required: [true, 'La hora de inicio es obligatoria']
+        required: [true, 'La fecha de inicio es obligatoria']
     },
-    horaFinal: {
+    fechaFinal: {
         type: Date,
-        required: [true, 'La hora de final es obligatoria']
+        required: [true, 'La fecha de final es obligatoria']
     },
     descripcion: {
         type: String,
@@ -25,12 +23,15 @@ const EventoSchema = Schema({
     },
     disponibilidad:{
         type: Boolean,
-        required: [true, 'la disponibilidad es obligatoria']
-
+        default: true
     },
     precio:{
         type: Number,
         required:[true, 'el precio es obligatorio']
+    },
+    img:{
+        type: String,
+        default: 'Sin imagen'
     }
 });
 

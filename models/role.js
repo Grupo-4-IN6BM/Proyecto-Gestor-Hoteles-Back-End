@@ -1,4 +1,3 @@
-//Comentario de prueba
 const { Schema, model } = require('mongoose');
 
 const RoleSchema = Schema({
@@ -7,4 +6,6 @@ const RoleSchema = Schema({
         required: [true , 'El rol es obligatorio']
     },
 });
+
+
 module.exports = model('Role', RoleSchema);
