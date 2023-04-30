@@ -6,15 +6,12 @@ const getHoteles = async (req = request, res = response) => {
 
     const query = { estado: true };
 
-    const listaHoteles = await Promise.all([
-        Hotel.countDocuments(query),
-        Hotel.find(query).populate("habitaciones", "numero costo descripcion")
+    const listaHoteles = await Hotel.find({estado: true}).populate("habitaciones", "numero costo descripcion")
         .populate("eventos", "nombre precio")
         .populate("servicios", "nombre precio descripcion")
         .populate("administrador", "nombre identificacion")
         .populate("trabajadores", "nombre identificacion")
-    ]);
-
+    console.log(listaHoteles)
     res.json({
         listaHoteles
     });
@@ -59,14 +56,21 @@ const getHotelesPorNombre = async (req = request, res = response) => {
 }
 
 const postHoteles = async (req = request, res = response) => {
-    const id = req.usuario.id
     const administrador = req.usuario.id
     const { nombre, pais, direccion, ...resto} = req.body;
-    const hotelGuardadoDB = new Hotel({ nombre,pais,direccion,administrador,...resto });
+
+    const buscarAdmin = await Hotel.findOne({administrador: administrador})
+
+    if(buscarAdmin){
+        res.status(400).json({
+            msg: `El administrador ${buscarAdmin.administrador}, ya es administrador de un hotel`
+        })
+    }else{
+        const hotelGuardadoDB = new Hotel({ nombre,pais,direccion,administrador,...resto });
 
     await hotelGuardadoDB.save();
     res.status(201).json(hotelGuardadoDB)
-
+    }
 }
 
 const putHotel = async (req = request, res = response) => {

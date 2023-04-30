@@ -34,7 +34,6 @@ router.post('/agregar', [
     check('fechaFinal', ' La fecha final es obligatoria').not().isEmpty(),
     check('fechaFinal', ' Ingresa una fecha final valida').custom(esFecha),
     check('habitaciones', 'Las habitaciones son obligatorias').not().isEmpty(),
-    check('dias_habitaciones', 'Los dias de las habitaciones son obligatorios').not().isEmpty(),
     validarCampos
 ], postReservacion);
 
@@ -47,7 +46,6 @@ router.put('/editarMiReservacion', [
     check('fechaFinal', ' La fecha final es obligatoria').not().isEmpty(),
     check('fechaFinal', ' Ingresa una fecha final valida').custom(esFecha),
     check('habitaciones', 'Las habitaciones son obligatorias').not().isEmpty(),
-    check('dias_habitaciones', 'Los dias de las habitaciones son obligatorios').not().isEmpty(),
     validarCampos
 ], putMiReservacion);
 

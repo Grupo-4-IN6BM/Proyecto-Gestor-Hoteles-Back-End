@@ -1,103 +1,103 @@
 {
     "client": "Thunder Client",
     "collectionName": "Gestor Hoteles",
-    "dateExported": "2023-04-17T00:30:32.527Z",
+    "dateExported": "2023-04-24T17:38:52.895Z",
     "version": "1.1",
     "folders": [
         {
-            "_id": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "USUARIOS",
             "containerId": "",
-            "created": "2023-04-10T02:22:59.976Z",
+            "created": "2023-04-24T14:27:42.931Z",
             "sortNum": 10000
         },
         {
-            "_id": "7a0499fe-938d-47ed-8063-721608c51215",
+            "_id": "bd054cc4-d55b-4fd9-a1af-55ad3fb8f782",
             "name": "HABITACIONES",
             "containerId": "",
-            "created": "2023-04-10T02:39:22.137Z",
+            "created": "2023-04-24T14:27:42.932Z",
             "sortNum": 20000
         },
         {
-            "_id": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "HOTELES",
             "containerId": "",
-            "created": "2023-04-10T02:56:44.443Z",
+            "created": "2023-04-24T14:27:42.933Z",
             "sortNum": 70000
         },
         {
-            "_id": "1f573a70-26d5-4892-9046-b1ac54c54c44",
+            "_id": "bc22396d-7367-4fdc-8034-53657424e55e",
             "name": "EVENTOS",
             "containerId": "",
-            "created": "2023-04-16T04:35:24.388Z",
+            "created": "2023-04-24T14:27:42.934Z",
             "sortNum": 80000
         },
         {
-            "_id": "58bcddce-51fd-4360-b652-1d69f19675ab",
+            "_id": "ec3a676a-7b45-4ef1-8973-f7597f4cd4a3",
             "name": "SERVICIOS",
             "containerId": "",
-            "created": "2023-04-16T04:35:35.830Z",
+            "created": "2023-04-24T14:27:42.935Z",
             "sortNum": 90000
         },
         {
-            "_id": "a297c611-253e-45f6-a417-7c31ed25dd79",
+            "_id": "d393e7d6-3590-4f27-92dd-4792b411b182",
             "name": "TIPO-EVENTOS",
             "containerId": "",
-            "created": "2023-04-16T04:35:43.859Z",
+            "created": "2023-04-24T14:27:42.936Z",
             "sortNum": 100000
         },
         {
-            "_id": "c4c0cbaf-0cf7-4c3a-b1f5-4e838a001810",
+            "_id": "7a1c02f8-cc4f-4e00-a4d9-59454f357793",
             "name": "BUSCADORES",
             "containerId": "",
-            "created": "2023-04-16T04:36:01.492Z",
+            "created": "2023-04-24T14:27:42.937Z",
             "sortNum": 110000
         },
         {
-            "_id": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "RESERVACIONES",
             "containerId": "",
-            "created": "2023-04-16T04:36:34.911Z",
+            "created": "2023-04-24T14:27:42.938Z",
             "sortNum": 120000
         },
         {
-            "_id": "f5406ce6-6db3-4471-a3ef-510561040ad2",
+            "_id": "b1aa1a39-3e18-4493-aae5-b62c04559c14",
             "name": "FACTURAS",
             "containerId": "",
-            "created": "2023-04-16T04:36:40.776Z",
+            "created": "2023-04-24T14:27:42.939Z",
             "sortNum": 130000
         }
     ],
     "requests": [
         {
-            "_id": "fe843110-8fc0-430b-afe0-3eb033e399af",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "6a7fdd62-6ba1-4891-9bf0-9160f2df054d",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "POST USUARIO",
             "url": "localhost:8080/api/usuarios/agregarUsuario",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2023-03-30T05:13:03.023Z",
-            "modified": "2023-04-10T02:23:08.709Z",
+            "created": "2023-04-24T14:27:42.931Z",
+            "modified": "2023-04-24T15:33:19.100Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"nombre\":\"Luis flores\",\n    \"edad\": 17,\n    \"identificacion\": 3012312,\n    \"correo\":\"lflorsssess@gmail.com\",\n    \"password\":\"123456\"\n}",
+                "raw": "{\n    \"nombre\":\"Luis flores\",\n    \"edad\": 17,\n    \"identificacion\": 30122312,\n    \"correo\":\"lflorsassess@gmail.com\",\n    \"password\":\"123456\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "40755d69-0725-452c-801a-9b224db0d658",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "9a6a73b4-e28e-4944-82ad-db2e571581b8",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "POST ADMIN",
             "url": "localhost:8080/api/usuarios/agregarAdmin",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2023-04-09T06:04:12.476Z",
-            "modified": "2023-04-10T03:16:36.935Z",
+            "created": "2023-04-24T14:27:42.932Z",
+            "modified": "2023-04-24T14:27:42.932Z",
             "headers": [],
             "params": [],
             "body": {
@@ -108,29 +108,29 @@
             "tests": []
         },
         {
-            "_id": "47eb4720-a209-4411-be64-3f8fea2bcb81",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "91059825-ba13-4c30-ba1c-3f54c4ecd99f",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "GET USUARIO",
             "url": "localhost:8080/api/usuarios/mostrar",
             "method": "GET",
             "sortNum": 30000,
-            "created": "2023-04-09T06:01:24.998Z",
-            "modified": "2023-04-10T02:23:10.613Z",
+            "created": "2023-04-24T14:27:42.933Z",
+            "modified": "2023-04-24T14:27:42.933Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "8fa9f95c-7ba2-4d8b-92af-4c481fa53159",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "b6080682-9922-4fc0-8007-35e91c08a3a4",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "PUT MI USUARIO",
             "url": "localhost:8080/api/usuarios/editarMiUsuario",
             "method": "PUT",
             "sortNum": 40000,
-            "created": "2023-04-09T06:01:26.318Z",
-            "modified": "2023-04-10T02:37:42.109Z",
+            "created": "2023-04-24T14:27:42.934Z",
+            "modified": "2023-04-24T14:27:42.934Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -146,15 +146,15 @@
             "tests": []
         },
         {
-            "_id": "9f652ba4-16f9-4e25-9205-0f7c5201f9ec",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "91fb575b-5c81-43ca-ac7d-8af66cb90121",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "PUT USUARIO POR ID",
             "url": "localhost:8080/api/usuarios/editar/64325997c6df55238b4f8e17",
             "method": "PUT",
             "sortNum": 50000,
-            "created": "2023-04-10T02:21:55.706Z",
-            "modified": "2023-04-10T02:34:04.748Z",
+            "created": "2023-04-24T14:27:42.935Z",
+            "modified": "2023-04-24T14:27:42.935Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -170,15 +170,15 @@
             "tests": []
         },
         {
-            "_id": "a0d876f2-24ec-41a8-80b5-4d2c5320520d",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "12649ebb-766f-4b56-a3dd-f234dc49ca30",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "DELETE MI USUARIO",
             "url": "localhost:8080/api/usuarios/eliminarMiCuenta",
             "method": "DELETE",
             "sortNum": 60000,
-            "created": "2023-04-09T06:01:27.708Z",
-            "modified": "2023-04-10T02:37:49.180Z",
+            "created": "2023-04-24T14:27:42.936Z",
+            "modified": "2023-04-24T14:27:42.936Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -194,29 +194,29 @@
             "tests": []
         },
         {
-            "_id": "61be02f8-82ae-47a6-82c4-9c8b20f5d078",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "7a0499fe-938d-47ed-8063-721608c51215",
+            "_id": "54c6a08c-6cbe-47ad-ab35-9df1f620e801",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bd054cc4-d55b-4fd9-a1af-55ad3fb8f782",
             "name": "GET HABITACIONES",
             "url": "localhost:8080/api/habitaciones/mostrar",
             "method": "GET",
             "sortNum": 60000,
-            "created": "2023-04-10T02:39:31.302Z",
-            "modified": "2023-04-10T02:41:27.191Z",
+            "created": "2023-04-24T14:27:42.937Z",
+            "modified": "2023-04-24T14:27:42.937Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "17ff56e9-93d8-40ca-93f3-f5d645de7d35",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "f5f141ca-9e4b-497c-9d6f-7d6350a1520f",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "DELETE USUARIO POR ID",
             "url": "localhost:8080/api/usuarios/eliminar/64325997c6df55238b4f8e17",
             "method": "DELETE",
             "sortNum": 70000,
-            "created": "2023-04-10T02:22:42.289Z",
-            "modified": "2023-04-10T02:32:53.440Z",
+            "created": "2023-04-24T14:27:42.938Z",
+            "modified": "2023-04-24T14:27:42.938Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -232,72 +232,72 @@
             "tests": []
         },
         {
-            "_id": "052ca79d-bb3e-4251-99d7-116da18cf8f0",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "7a0499fe-938d-47ed-8063-721608c51215",
+            "_id": "d916496a-db02-4e69-b87e-a2223e22b20a",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bd054cc4-d55b-4fd9-a1af-55ad3fb8f782",
             "name": "GET HABITACIONES POR ID",
             "url": "localhost:8080/api/habitaciones/mostrar/643c6b949155e1a15180b584",
             "method": "GET",
             "sortNum": 70000,
-            "created": "2023-04-10T02:39:55.771Z",
-            "modified": "2023-04-16T21:42:04.413Z",
+            "created": "2023-04-24T14:27:42.939Z",
+            "modified": "2023-04-24T14:27:42.939Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "058f78bc-28cc-4902-934a-c71c1c674770",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "e51bf5a1-879b-4835-a252-71f2df30cf91",
+            "_id": "1fb8a69b-1ad3-44c8-9770-350911ccc9ec",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "868fe33d-7603-4f06-93a4-ccba583f14cf",
             "name": "LOGIN",
             "url": "localhost:8080/api/auth/login",
             "method": "POST",
             "sortNum": 80000,
-            "created": "2023-04-09T06:01:42.053Z",
-            "modified": "2023-04-16T04:25:22.374Z",
+            "created": "2023-04-24T14:27:42.940Z",
+            "modified": "2023-04-24T15:33:27.522Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"correo\":\"asana212@gmail.com\",\n    \"password\":\"123456\"\n}",
+                "raw": "{\n    \"correo\":\"lflorsassess@gmail.com\",\n    \"password\":\"123456\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "72ff16b8-12a4-4554-bcf9-3cf4d9a6bb50",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "7a0499fe-938d-47ed-8063-721608c51215",
+            "_id": "8cf0460d-337e-4d70-a011-612e6af7b4f9",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bd054cc4-d55b-4fd9-a1af-55ad3fb8f782",
             "name": "POST HABITACIONES",
             "url": "localhost:8080/api/habitaciones/agregar",
             "method": "POST",
             "sortNum": 80000,
-            "created": "2023-04-10T02:40:01.632Z",
-            "modified": "2023-04-16T21:35:16.486Z",
+            "created": "2023-04-24T14:27:42.941Z",
+            "modified": "2023-04-24T17:34:37.570Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OTU4MWFjNDc0YTliNGNiOGQxOWIiLCJpYXQiOjE2ODIzNDc0MTAsImV4cCI6MTY4Mjk5NTQxMH0.sDtjnsIbMmLCJojFNcBECxlMpkw_SABPIZgopY5RBSY"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"numero\":1231,\n  \"costo\":300,\n  \"capacidad\":4,\n  \"descripcion\": \"Linda habitacion con dos baños y un dormitorio\",\n  \"img\":\"\"\n}",
+                "raw": "{\n  \"numero\":14145,\n  \"costo\":300,\n  \"capacidad\":4,\n  \"descripcion\": \"Linda habitacion con dos baños y un dormitorio\",\n  \"img\":\"\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "8f2bbc97-a1b7-4335-a335-ee0558665013",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "7a0499fe-938d-47ed-8063-721608c51215",
+            "_id": "cee5fdab-34bb-4692-a2f2-060348ed3a07",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bd054cc4-d55b-4fd9-a1af-55ad3fb8f782",
             "name": "PUT HABITACIONES",
             "url": "localhost:8080/api/habitaciones/editar/643c691c12c38749fc1306fe",
             "method": "PUT",
             "sortNum": 90000,
-            "created": "2023-04-10T02:40:13.732Z",
-            "modified": "2023-04-16T21:34:52.701Z",
+            "created": "2023-04-24T14:27:42.942Z",
+            "modified": "2023-04-24T14:27:42.942Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -313,15 +313,15 @@
             "tests": []
         },
         {
-            "_id": "449cfa40-b37f-447f-9d57-4b8b0843142e",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "7a0499fe-938d-47ed-8063-721608c51215",
+            "_id": "2a9e5d6f-83f7-4854-88c1-32c89d420d24",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bd054cc4-d55b-4fd9-a1af-55ad3fb8f782",
             "name": "DELETE HABITACIONES",
             "url": "localhost:8080/api/habitaciones/eliminar/643c6bc39155e1a15180b595",
             "method": "DELETE",
             "sortNum": 100000,
-            "created": "2023-04-10T02:40:30.032Z",
-            "modified": "2023-04-16T21:42:36.329Z",
+            "created": "2023-04-24T14:27:42.943Z",
+            "modified": "2023-04-24T14:27:42.943Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -332,57 +332,57 @@
             "tests": []
         },
         {
-            "_id": "3861006f-af2c-4fff-b286-b6c8d347016a",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "7f2b0fcf-0d5f-49c8-beb8-6835dc9184a7",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "GET HOTELES",
             "url": "localhost:8080/api/hoteles/buscar",
             "method": "GET",
             "sortNum": 110000,
-            "created": "2023-04-10T02:56:56.988Z",
-            "modified": "2023-04-10T03:34:16.435Z",
+            "created": "2023-04-24T14:27:42.944Z",
+            "modified": "2023-04-24T14:27:42.944Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "2cf886a4-49b5-4379-80e5-a4fbef16155b",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "8d7b9d3d-965f-4ffa-a432-a84e3297b688",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "GET HOTELES POR NOMBRE",
             "url": "localhost:8080/api/hoteles/buscarNombre/Hotel Mayan",
             "method": "GET",
             "sortNum": 111250,
-            "created": "2023-04-16T04:32:16.393Z",
-            "modified": "2023-04-16T23:31:07.426Z",
+            "created": "2023-04-24T14:27:42.945Z",
+            "modified": "2023-04-24T14:27:42.945Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "56408e9d-5a8f-4473-8252-10049083805a",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "86536b3e-c75b-49d4-a327-f55dbf10d919",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "GET HOTELES POR ID",
             "url": "localhost:8080/api/hoteles/buscar/643b79edd91fb7139657abcc",
             "method": "GET",
             "sortNum": 112500,
-            "created": "2023-04-16T04:32:13.762Z",
-            "modified": "2023-04-16T23:25:24.245Z",
+            "created": "2023-04-24T14:27:42.946Z",
+            "modified": "2023-04-24T14:27:42.946Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "fcce3336-0e69-4731-8716-566e07dfa751",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "f26a3db7-698e-439e-8d4d-b715e135cedc",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "DELETE HOTELES",
             "url": "localhost:8080/api/hoteles/eliminar/643c8529b5dc7d419b156d18",
             "method": "DELETE",
             "sortNum": 115000,
-            "created": "2023-04-16T04:30:50.177Z",
-            "modified": "2023-04-16T23:31:51.250Z",
+            "created": "2023-04-24T14:27:42.947Z",
+            "modified": "2023-04-24T14:27:42.947Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -393,15 +393,15 @@
             "tests": []
         },
         {
-            "_id": "f0a6105e-d927-4922-94b6-d78cfc7325af",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "b7ac4b6a-a0df-4ddd-9ffd-d0aa1b38c754",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "DESHABILITAR HOTELES",
             "url": "localhost:8080/api/hoteles/deshabilitar/643c8529b5dc7d419b156d18",
             "method": "DELETE",
             "sortNum": 117500,
-            "created": "2023-04-16T04:33:24.042Z",
-            "modified": "2023-04-16T23:31:37.414Z",
+            "created": "2023-04-24T14:27:42.948Z",
+            "modified": "2023-04-24T14:27:42.948Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -412,19 +412,19 @@
             "tests": []
         },
         {
-            "_id": "39cc2b9b-193c-4908-aa86-b74dd0d00665",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "4e59c3b4-1131-45c9-8507-193c1b4418fc",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "POST HOTELES",
             "url": "localhost:8080/api/hoteles/agregar",
             "method": "POST",
             "sortNum": 120000,
-            "created": "2023-04-10T02:57:03.167Z",
-            "modified": "2023-04-16T23:30:48.576Z",
+            "created": "2023-04-24T14:27:42.949Z",
+            "modified": "2023-04-24T14:44:50.445Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OTU4MWFjNDc0YTliNGNiOGQxOWIiLCJpYXQiOjE2ODIzNDc0MTAsImV4cCI6MTY4Mjk5NTQxMH0.sDtjnsIbMmLCJojFNcBECxlMpkw_SABPIZgopY5RBSY"
                 }
             ],
             "params": [],
@@ -436,15 +436,15 @@
             "tests": []
         },
         {
-            "_id": "8482c895-828a-41e4-a69e-03433343207c",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "6a839708-3c50-4ab1-bf11-8a04f2c4967a",
+            "_id": "8b297912-43b8-48e1-b766-91bc2a43ece1",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "dcb721fa-f2df-4804-808f-99c9b0f8340e",
             "name": "PUT HOTELES",
             "url": "localhost:8080/api/hoteles/editar/:id",
             "method": "PUT",
             "sortNum": 130000,
-            "created": "2023-04-16T04:30:44.731Z",
-            "modified": "2023-04-16T04:32:04.626Z",
+            "created": "2023-04-24T14:27:42.950Z",
+            "modified": "2023-04-24T14:27:42.950Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -460,67 +460,67 @@
             "tests": []
         },
         {
-            "_id": "9045abd0-8bb4-4bc2-8cff-9b850dd7b085",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "1f573a70-26d5-4892-9046-b1ac54c54c44",
+            "_id": "77c58a8f-e1b5-4bd1-8d1b-509ef51c11b8",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bc22396d-7367-4fdc-8034-53657424e55e",
             "name": "GET EVENTOS",
             "url": "localhost:8080/api/eventos/mostrar",
             "method": "GET",
             "sortNum": 130000,
-            "created": "2023-04-16T04:40:36.168Z",
-            "modified": "2023-04-16T22:05:41.124Z",
+            "created": "2023-04-24T14:27:42.951Z",
+            "modified": "2023-04-24T14:27:42.951Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "d1fca459-ddaa-4d4c-b122-54e821e9a34a",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "1f573a70-26d5-4892-9046-b1ac54c54c44",
+            "_id": "01bd46c5-6fa3-441c-a1a4-922827c383bc",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bc22396d-7367-4fdc-8034-53657424e55e",
             "name": "POST EVENTOS",
             "url": "localhost:8080/api/eventos/registrarEvento",
             "method": "POST",
             "sortNum": 140000,
-            "created": "2023-04-16T04:42:52.551Z",
-            "modified": "2023-04-16T22:17:27.137Z",
+            "created": "2023-04-24T14:27:42.952Z",
+            "modified": "2023-04-24T16:23:57.478Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OTU4MWFjNDc0YTliNGNiOGQxOWIiLCJpYXQiOjE2ODIzNDc0MTAsImV4cCI6MTY4Mjk5NTQxMH0.sDtjnsIbMmLCJojFNcBECxlMpkw_SABPIZgopY5RBSY"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nombre\": \"Concierto Ferxxo\",\n  \"fechaInicio\": \"2023-04-19\",\n  \"fechaFinal\": \"2023-04-20\",\n  \"descripcion\":\"Concierto con cantantes conocidos\",\n  \"precio\":500,\n  \"tipo\": \"Concierto\"\n}",
+                "raw": "{\n  \"nombre\": \"Concierto AAAA\",\n  \"fechaInicio\": \"2023-04-19\",\n  \"fechaFinal\": \"2023-04-20\",\n  \"descripcion\":\"Concierto con cantantes conocidos\",\n  \"precio\":500,\n  \"tipo\": \"Concierto\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "174224a6-f8fd-4ebe-b0f2-55abbad7d258",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "1f573a70-26d5-4892-9046-b1ac54c54c44",
+            "_id": "f3fa2738-5998-4f1f-9f40-bf60dbf8107b",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bc22396d-7367-4fdc-8034-53657424e55e",
             "name": "PUT EVENTOS",
             "url": "localhost:8080/api/eventos/editarEvento/:id",
             "method": "PUT",
             "sortNum": 150000,
-            "created": "2023-04-16T04:43:03.211Z",
-            "modified": "2023-04-16T04:44:42.285Z",
+            "created": "2023-04-24T14:27:42.953Z",
+            "modified": "2023-04-24T14:27:42.953Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "d06ce0e8-d07e-48a5-aa90-c6e439e9c370",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "1f573a70-26d5-4892-9046-b1ac54c54c44",
+            "_id": "c5458603-13a0-4db3-8fc6-61fe16a276da",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "bc22396d-7367-4fdc-8034-53657424e55e",
             "name": "DELETE EVENTOS",
             "url": "localhost:8080/api/eventos/eliminarEvento/643c73f842ce4729a1991a9d",
             "method": "DELETE",
             "sortNum": 160000,
-            "created": "2023-04-16T04:43:16.617Z",
-            "modified": "2023-04-16T22:22:30.554Z",
+            "created": "2023-04-24T14:27:42.954Z",
+            "modified": "2023-04-24T14:27:42.954Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -531,33 +531,33 @@
             "tests": []
         },
         {
-            "_id": "7d8a6c36-414b-4e0b-bf26-6e3f54c45b6f",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "58bcddce-51fd-4360-b652-1d69f19675ab",
+            "_id": "407f4503-9c36-4507-84a7-b053d614e2d5",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "ec3a676a-7b45-4ef1-8973-f7597f4cd4a3",
             "name": "GET SERVICIOS",
             "url": "localhost:8080/api/servicios/mostrar",
             "method": "GET",
             "sortNum": 170000,
-            "created": "2023-04-16T04:45:19.324Z",
-            "modified": "2023-04-16T04:46:10.929Z",
+            "created": "2023-04-24T14:27:42.955Z",
+            "modified": "2023-04-24T14:27:42.955Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "7d6098cc-1215-4dd3-8a5c-12fbbb0e9a7c",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "58bcddce-51fd-4360-b652-1d69f19675ab",
+            "_id": "eeaf691f-9cd5-45f8-a4b6-3b3a7df55ecb",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "ec3a676a-7b45-4ef1-8973-f7597f4cd4a3",
             "name": "POST SERVICIOS",
             "url": "localhost:8080/api/servicios/agregar",
             "method": "POST",
             "sortNum": 180000,
-            "created": "2023-04-16T04:45:28.957Z",
-            "modified": "2023-04-16T21:53:25.630Z",
+            "created": "2023-04-24T14:27:42.956Z",
+            "modified": "2023-04-24T15:09:48.858Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OTU4MWFjNDc0YTliNGNiOGQxOWIiLCJpYXQiOjE2ODIzNDc0MTAsImV4cCI6MTY4Mjk5NTQxMH0.sDtjnsIbMmLCJojFNcBECxlMpkw_SABPIZgopY5RBSY"
                 }
             ],
             "params": [],
@@ -569,15 +569,15 @@
             "tests": []
         },
         {
-            "_id": "7db76c1a-3b08-40d5-a13d-910b9c6e8551",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "58bcddce-51fd-4360-b652-1d69f19675ab",
+            "_id": "801a401c-b3e3-4b80-ae03-d1114b4f8943",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "ec3a676a-7b45-4ef1-8973-f7597f4cd4a3",
             "name": "PUT SERVICIOS",
             "url": "localhost:8080/api/servicios/editar/643c700f2e4c49bf2fd690bb",
             "method": "PUT",
             "sortNum": 190000,
-            "created": "2023-04-16T04:45:35.601Z",
-            "modified": "2023-04-16T22:02:07.056Z",
+            "created": "2023-04-24T14:27:42.957Z",
+            "modified": "2023-04-24T14:27:42.957Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -593,15 +593,15 @@
             "tests": []
         },
         {
-            "_id": "dac75747-3c28-4c6b-8341-e07b52104f96",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "58bcddce-51fd-4360-b652-1d69f19675ab",
+            "_id": "6fe444bd-d05f-4fa1-9fbd-20c108880be8",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "ec3a676a-7b45-4ef1-8973-f7597f4cd4a3",
             "name": "DELETE SERVICIOS",
             "url": "localhost:8080/api/servicios/eliminar/643c6e2896c8cf2bd2998780",
             "method": "DELETE",
             "sortNum": 200000,
-            "created": "2023-04-16T04:45:44.063Z",
-            "modified": "2023-04-16T21:58:36.526Z",
+            "created": "2023-04-24T14:27:42.958Z",
+            "modified": "2023-04-24T14:27:42.958Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -612,33 +612,33 @@
             "tests": []
         },
         {
-            "_id": "16211caa-52e6-4c2a-90a3-b9ae02829a0f",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "a297c611-253e-45f6-a417-7c31ed25dd79",
+            "_id": "063959b5-12ff-4c0a-9078-c2e65dc22f5b",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "d393e7d6-3590-4f27-92dd-4792b411b182",
             "name": "GET TIPO-EVENTOS",
             "url": "localhost:8080/api/tipo/mostrar",
             "method": "GET",
             "sortNum": 210000,
-            "created": "2023-04-16T04:47:43.927Z",
-            "modified": "2023-04-16T04:49:41.115Z",
+            "created": "2023-04-24T14:27:42.959Z",
+            "modified": "2023-04-24T14:27:42.959Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "0bc49797-56dc-41b7-b90a-92a798bff5c0",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "a297c611-253e-45f6-a417-7c31ed25dd79",
+            "_id": "55186b0d-1e2f-4c7a-9788-cb04ae4f1a2f",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "d393e7d6-3590-4f27-92dd-4792b411b182",
             "name": "POST TIPO-EVENTOS",
             "url": "localhost:8080/api/tipo/agregar/",
             "method": "POST",
             "sortNum": 220000,
-            "created": "2023-04-16T04:47:53.557Z",
-            "modified": "2023-04-16T22:15:27.324Z",
+            "created": "2023-04-24T14:27:42.960Z",
+            "modified": "2023-04-24T14:46:05.245Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OTU4MWFjNDc0YTliNGNiOGQxOWIiLCJpYXQiOjE2ODIzNDc0MTAsImV4cCI6MTY4Mjk5NTQxMH0.sDtjnsIbMmLCJojFNcBECxlMpkw_SABPIZgopY5RBSY"
                 }
             ],
             "params": [],
@@ -650,15 +650,15 @@
             "tests": []
         },
         {
-            "_id": "6f90e076-06ab-4e15-b070-9fb09b345f70",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "a297c611-253e-45f6-a417-7c31ed25dd79",
+            "_id": "58919bb7-6b40-4095-a5c0-7e3c61a7593b",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "d393e7d6-3590-4f27-92dd-4792b411b182",
             "name": "PUT TIPO-EVENTOS",
             "url": "localhost:8080/api/tipo/editar/643c73d642ce4729a1991a97",
             "method": "PUT",
             "sortNum": 230000,
-            "created": "2023-04-16T04:48:00.061Z",
-            "modified": "2023-04-16T22:24:12.629Z",
+            "created": "2023-04-24T14:27:42.961Z",
+            "modified": "2023-04-24T14:27:42.961Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -674,15 +674,15 @@
             "tests": []
         },
         {
-            "_id": "2c0ae554-e990-451f-842c-23f19118a5e6",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "a297c611-253e-45f6-a417-7c31ed25dd79",
+            "_id": "1100ab3c-3578-4146-a395-9b77913a4587",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "d393e7d6-3590-4f27-92dd-4792b411b182",
             "name": "DELETE TIPO-EVENTOS",
             "url": "localhost:8080/api/tipo/eliminar/643c73d642ce4729a1991a97",
             "method": "DELETE",
             "sortNum": 240000,
-            "created": "2023-04-16T04:48:07.608Z",
-            "modified": "2023-04-16T22:25:07.067Z",
+            "created": "2023-04-24T14:27:42.962Z",
+            "modified": "2023-04-24T14:27:42.962Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -693,34 +693,34 @@
             "tests": []
         },
         {
-            "_id": "efdb4685-bf5c-4557-ae12-6efc082e7080",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "99d9a4c6-0145-44bd-8e30-0ed788eadefd",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "GET RESERVACIONES",
             "url": "localhost:8080/api/reservaciones/",
             "method": "GET",
             "sortNum": 250000,
-            "created": "2023-04-16T21:14:20.451Z",
-            "modified": "2023-04-16T22:25:32.888Z",
+            "created": "2023-04-24T14:27:42.963Z",
+            "modified": "2023-04-24T14:44:10.158Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OTU4MWFjNDc0YTliNGNiOGQxOWIiLCJpYXQiOjE2ODIzNDc0MTAsImV4cCI6MTY4Mjk5NTQxMH0.sDtjnsIbMmLCJojFNcBECxlMpkw_SABPIZgopY5RBSY"
                 }
             ],
             "params": [],
             "tests": []
         },
         {
-            "_id": "bae55dc1-34cf-4c5d-ab2f-12c39f04809c",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "f7060b23-68be-427a-8dc6-783232b07117",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "DETALLE CUENTA ",
             "url": "localhost:8080/api/reservaciones/detalleCuenta",
             "method": "GET",
             "sortNum": 251875,
-            "created": "2023-04-16T23:12:18.419Z",
-            "modified": "2023-04-16T23:24:45.918Z",
+            "created": "2023-04-24T14:27:42.964Z",
+            "modified": "2023-04-24T14:27:42.964Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -731,15 +731,15 @@
             "tests": []
         },
         {
-            "_id": "a5ca2f2d-8b6c-44a8-b2ee-5d841ffbd94c",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "0ab3fe66-f523-4e38-8060-11edec3b4826",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "MI RESERVACION",
             "url": "localhost:8080/api/reservaciones/misReservaciones",
             "method": "GET",
             "sortNum": 253750,
-            "created": "2023-04-16T21:18:57.708Z",
-            "modified": "2023-04-16T22:25:38.569Z",
+            "created": "2023-04-24T14:27:42.965Z",
+            "modified": "2023-04-24T14:27:42.965Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -750,15 +750,15 @@
             "tests": []
         },
         {
-            "_id": "fd3f121e-4ffe-4f53-b21f-522c8073befd",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "8c90a7ad-1f02-4043-9e69-e1a48557942c",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "GET NOMBRE",
             "url": "localhost:8080/api/reservaciones/reservacion/Angel",
             "method": "GET",
             "sortNum": 255000,
-            "created": "2023-04-16T21:18:33.653Z",
-            "modified": "2023-04-16T23:05:16.119Z",
+            "created": "2023-04-24T14:27:42.966Z",
+            "modified": "2023-04-24T14:27:42.966Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -769,39 +769,39 @@
             "tests": []
         },
         {
-            "_id": "8ba25810-75a3-4bcd-a64d-dbfe652cc26a",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "e0869597-e0fb-435f-b39a-c1cf89ab2b03",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "POST RESERVACIONES",
             "url": "localhost:8080/api/reservaciones/agregar",
             "method": "POST",
             "sortNum": 260000,
-            "created": "2023-04-16T21:14:44.221Z",
-            "modified": "2023-04-16T22:39:41.515Z",
+            "created": "2023-04-24T14:27:42.967Z",
+            "modified": "2023-04-24T17:34:48.504Z",
             "headers": [
                 {
                     "name": "x-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDNiNzg2NjNiNmExNzIyNTA5MGI0MTUiLCJpYXQiOjE2ODE2ODA0ODEsImV4cCI6MTY4MjMyODQ4MX0.LvI7Mq1HZ-efztryzy1JutOIGNbqtV_b1ZL1hx1Zdu8"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2YTEzZTIyNDBkMTE4OWE0YmM2YjIiLCJpYXQiOjE2ODIzNTA0MDcsImV4cCI6MTY4Mjk5ODQwN30.-P-XEqh1rCSYB0UQ2F3dI0eh4dxmkKiYHxdxWQIfWbQ"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"personaReserva\": \"Reservacion Angel\",\n  \"fechaInicio\": \"2023-04-17\",\n  \"fechaFinal\": \"2023-04-23\",\n  \"cantidadPersonas\": 2,\n  \"habitaciones\": [\"643c6bec9155e1a15180b5ac\"],\n  \"dias_habitaciones\": [\"2\"],\n  \"servicios\": [\"643c700f2e4c49bf2fd690bb\"],\n  \"eventos\": [\"643c75642e9c5ad807e01214\"]\n}",
+                "raw": "{\n  \"personaReserva\": \"Reservacion Angel\",\n  \"fechaInicio\": \"2023-04-17\",\n  \"fechaFinal\": \"2023-04-28\",\n  \"cantidadPersonas\": 2,\n  \"habitaciones\": [\"6446bdad585e6324d0cb2508\"],\n  \"servicios\": [\"64469bbe601c4889c0cfd774\"],\n  \"eventos\": [\"644696b4601c4889c0cfd768\"]\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "c3ee3423-fc30-4369-bb5d-8a6a5c2e9a38",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "a719b040-8898-484e-80dd-47ad604936a1",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "PUT RESERVACIONES",
             "url": "localhost:8080/api/reservaciones/editar/643c811bfed7ac174f8826fa",
             "method": "PUT",
             "sortNum": 270000,
-            "created": "2023-04-16T21:14:51.900Z",
-            "modified": "2023-04-16T23:23:18.929Z",
+            "created": "2023-04-24T14:27:42.968Z",
+            "modified": "2023-04-24T14:27:42.968Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -817,15 +817,15 @@
             "tests": []
         },
         {
-            "_id": "d749d46e-509d-4400-af51-a8c0143b72d5",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "d33239a6-14c7-4bb5-99a6-3594b03d6a75",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "PUT MI RESERVACION",
             "url": "localhost:8080/api/reservaciones/editarMiReservacion",
             "method": "PUT",
             "sortNum": 275000,
-            "created": "2023-04-16T21:22:28.556Z",
-            "modified": "2023-04-16T23:22:53.762Z",
+            "created": "2023-04-24T14:27:42.969Z",
+            "modified": "2023-04-24T14:27:42.969Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -841,15 +841,15 @@
             "tests": []
         },
         {
-            "_id": "01a93c31-a023-4b32-bacb-8d05c11d1c14",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "bc16d7aa-981c-4a38-a5a9-8080ca2ba2b7",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "DELETE RESERVACIONES",
             "url": "localhost:8080/api/reservaciones/eliminar/:id",
             "method": "DELETE",
             "sortNum": 280000,
-            "created": "2023-04-16T21:14:59.773Z",
-            "modified": "2023-04-16T22:26:09.224Z",
+            "created": "2023-04-24T14:27:42.970Z",
+            "modified": "2023-04-24T14:27:42.970Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -860,15 +860,15 @@
             "tests": []
         },
         {
-            "_id": "2e7dee32-dc0b-4f17-8046-dddecb928599",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "03c45b8e-0b43-4798-89af-913dfefe2c55",
+            "_id": "f0df6af7-c3b1-440b-ad52-5d519d871c5b",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "9c1d3e35-f7a0-4916-a207-774fa0817e99",
             "name": "DELETE MI RESERVACION",
             "url": "localhost:8080/api/reservaciones/eliminarMiReservacion",
             "method": "DELETE",
             "sortNum": 290000,
-            "created": "2023-04-16T21:22:30.316Z",
-            "modified": "2023-04-16T22:26:16.713Z",
+            "created": "2023-04-24T14:27:42.971Z",
+            "modified": "2023-04-24T14:27:42.971Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -879,15 +879,15 @@
             "tests": []
         },
         {
-            "_id": "68c9105e-eec4-4d8f-99a5-9e21f362ff71",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "f5406ce6-6db3-4471-a3ef-510561040ad2",
+            "_id": "27409b45-398e-489b-a9a5-728c8556126b",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "b1aa1a39-3e18-4493-aae5-b62c04559c14",
             "name": "GET FACTURAS",
             "url": "localhost:8080/api/facturas/mostrar",
             "method": "GET",
             "sortNum": 290000,
-            "created": "2023-04-16T21:23:48.038Z",
-            "modified": "2023-04-17T00:10:34.027Z",
+            "created": "2023-04-24T14:27:42.972Z",
+            "modified": "2023-04-24T14:27:42.972Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -898,15 +898,15 @@
             "tests": []
         },
         {
-            "_id": "12150e05-1d8a-42a0-8099-a694737bed51",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "f5406ce6-6db3-4471-a3ef-510561040ad2",
+            "_id": "c9b0045f-8d25-4045-9838-9b20e3e17626",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "b1aa1a39-3e18-4493-aae5-b62c04559c14",
             "name": "MI FACTURA",
             "url": "localhost:8080/api/facturas/miFactura",
             "method": "GET",
             "sortNum": 300000,
-            "created": "2023-04-16T21:23:50.684Z",
-            "modified": "2023-04-17T00:10:15.907Z",
+            "created": "2023-04-24T14:27:42.973Z",
+            "modified": "2023-04-24T14:27:42.973Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -917,15 +917,15 @@
             "tests": []
         },
         {
-            "_id": "840e6091-6c82-463e-bf30-90c5d95c19ca",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "f5406ce6-6db3-4471-a3ef-510561040ad2",
+            "_id": "5d21d71b-6770-4a00-91f4-54e0e148b435",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "b1aa1a39-3e18-4493-aae5-b62c04559c14",
             "name": "POST FACTURA",
             "url": "localhost:8080/api/facturas/agregar",
             "method": "POST",
             "sortNum": 300000,
-            "created": "2023-04-16T21:23:58.251Z",
-            "modified": "2023-04-17T00:03:30.501Z",
+            "created": "2023-04-24T14:27:42.974Z",
+            "modified": "2023-04-24T14:27:42.974Z",
             "headers": [
                 {
                     "name": "x-token",
@@ -936,71 +936,71 @@
             "tests": []
         },
         {
-            "_id": "a0db66cd-77ac-4e92-baac-5e57a4e28c38",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "c4c0cbaf-0cf7-4c3a-b1f5-4e838a001810",
+            "_id": "622c9fd8-3c22-4644-8177-7838195bad2b",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "7a1c02f8-cc4f-4e00-a4d9-59454f357793",
             "name": "USUARIOS",
             "url": "localhost:8080/api/buscar/usuarios/Angel",
             "method": "GET",
             "sortNum": 310000,
-            "created": "2023-04-16T23:32:24.747Z",
-            "modified": "2023-04-16T23:39:37.188Z",
+            "created": "2023-04-24T14:27:42.975Z",
+            "modified": "2023-04-24T14:27:42.975Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "6a707133-9ce6-4da7-bea6-f6349029ab77",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "c4c0cbaf-0cf7-4c3a-b1f5-4e838a001810",
+            "_id": "e5c65c72-f9ae-4418-85e1-2ea62c4d71b6",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "7a1c02f8-cc4f-4e00-a4d9-59454f357793",
             "name": "HOTELES",
             "url": "localhost:8080/api/buscar/hoteles/Maya",
             "method": "GET",
             "sortNum": 320000,
-            "created": "2023-04-16T23:32:30.226Z",
-            "modified": "2023-04-16T23:39:34.943Z",
+            "created": "2023-04-24T14:27:42.977Z",
+            "modified": "2023-04-24T14:27:42.977Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "085a3986-d225-4c38-aaa8-b3789e2d68f5",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "c4c0cbaf-0cf7-4c3a-b1f5-4e838a001810",
+            "_id": "c9e8c480-f554-46b0-9431-9b459bcbaaa2",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "7a1c02f8-cc4f-4e00-a4d9-59454f357793",
             "name": "EVENTOS",
             "url": "localhost:8080/api/buscar/eventos/Concierto",
             "method": "GET",
             "sortNum": 330000,
-            "created": "2023-04-16T23:32:36.942Z",
-            "modified": "2023-04-16T23:36:45.848Z",
+            "created": "2023-04-24T14:27:42.978Z",
+            "modified": "2023-04-24T14:27:42.978Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "849ef53f-b75b-43b1-8723-d063d62f9a42",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "c4c0cbaf-0cf7-4c3a-b1f5-4e838a001810",
+            "_id": "f07268f9-394c-4acb-aaf6-a14eaafe33cd",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "7a1c02f8-cc4f-4e00-a4d9-59454f357793",
             "name": "HABITACIONES",
             "url": "localhost:8080/api/buscar/habitaciones/Linda habitacion",
             "method": "GET",
             "sortNum": 340000,
-            "created": "2023-04-16T23:33:28.543Z",
-            "modified": "2023-04-16T23:39:15.261Z",
+            "created": "2023-04-24T14:27:42.979Z",
+            "modified": "2023-04-24T14:27:42.979Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "bf45768e-ddfb-4d9c-86a1-f22818f96347",
-            "colId": "53357b06-61cf-42e6-ab9f-cf96af9916d1",
-            "containerId": "c4c0cbaf-0cf7-4c3a-b1f5-4e838a001810",
+            "_id": "832a57ca-16cc-49d4-85f1-b1a3602156f4",
+            "colId": "e6a47b65-23bf-48b0-b546-5a769cb8e225",
+            "containerId": "7a1c02f8-cc4f-4e00-a4d9-59454f357793",
             "name": "SERVICIOS",
             "url": "localhost:8080/api/buscar/servicios/mantenimiento",
             "method": "GET",
             "sortNum": 350000,
-            "created": "2023-04-16T23:33:38.191Z",
-            "modified": "2023-04-16T23:39:29.492Z",
+            "created": "2023-04-24T14:27:42.980Z",
+            "modified": "2023-04-24T14:27:42.980Z",
             "headers": [],
             "params": [],
             "tests": []

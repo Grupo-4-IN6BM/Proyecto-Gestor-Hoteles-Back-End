@@ -52,6 +52,9 @@ const HotelSchema = Schema({
     location: {
         lat: Number,
         lng: Number
+    },
+    telefono: {
+        type: String
     }
 });
 module.exports = model('Hotele', HotelSchema);

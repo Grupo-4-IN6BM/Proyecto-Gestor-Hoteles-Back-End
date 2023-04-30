@@ -28,7 +28,13 @@ const postHabitacion = async (req = request, res = response) => {
     const id = req.usuario.id
     const { numero, costo, descripcion, capacidad, ...resto} = req.body;
     const hotel_id = await Hotel.findOne({administrador: id});
+    const buscar = await Habitacion.findOne({ numero: numero })
     var hotel = hotel_id._id;
+    if (buscar) {
+        return res.status(400).json({
+            msg: `La habitacion con el numero ${buscar.numero} ya existe en la DB`
+        })
+    }else{
     const habitacionGuardadaDB = new Habitacion({numero, costo, hotel, descripcion, capacidad, ...resto});
     const hotelGuardaHabitacion = await Hotel.findByIdAndUpdate(hotel_id._id, {$push:{habitaciones: [habitacionGuardadaDB._id]}})
     await habitacionGuardadaDB.save();
@@ -36,19 +42,27 @@ const postHabitacion = async (req = request, res = response) => {
     res.json({
         habitacionGuardadaDB
     });
+    }
 
 }
 
 const putHabitacion = async (req = request, res = response) => {
     const { id } = req.params;
     const { _id, ...resto } = req.body;
+    const buscar = await Habitacion.findOne({ numero: numero })
 
-    const habitacionEditada = await Habitacion.findByIdAndUpdate(id, resto, {new: true});
+    if (buscar) {
+        return res.status(400).json({
+            msg: `La habitacion con el numero ${buscar.numero} ya existe en la DB`
+        })
+    }else{
+        const habitacionEditada = await Habitacion.findByIdAndUpdate(id, resto, {new: true});
 
-    res.json({
-        msg: 'PUT editar user',
-        habitacionEditada
-    });
+        res.status(201).json({
+            habitacionEditada
+        });
+    }
+    
 
 }
 

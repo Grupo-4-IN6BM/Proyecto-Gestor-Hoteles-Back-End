@@ -30,10 +30,10 @@ const UsuarioSchema = Schema({
         type: Boolean,
         default: true
     },
-    reservacion:{
+    reservacion:[{
         type: Schema.Types.ObjectId,
         ref: 'Reservacione',
-    },
+    }],
     img:{
         type: String,
         default: 'Sin imagen'

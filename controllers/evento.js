@@ -22,18 +22,27 @@ const getEventos = async (req = request, res = response) => {
 const postEvento = async (req = request, res = response) => {
   const id = req.usuario.id;
   const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio } = req.body;
-  const eventoGuardadoDB = new Evento({ nombre, fechaInicio, fechaFinal, descripcion, tipo, precio });
   const hotel_id = await Hotel.findOne({ administrador: id });
   var hotel = hotel_id._id;
-  const hotelGuardaEvento = await Hotel.findByIdAndUpdate(hotel_id._id, {
-    $push: { eventos: [eventoGuardadoDB._id] },
-  });
-  await eventoGuardadoDB.save();
 
-  res.json({
-    msg: 'Post Api - Agregando Evento',
-    eventoGuardadoDB
-  });
+  const buscar = await Evento.findOne({nombre: nombre})
+  if(buscar){
+    return res.status(400).json({
+      msg: `El evento con el nombre ${buscar.nombre} ya existe en la DB`
+    })
+  }else{
+    const eventoGuardadoDB = new Evento({ nombre, fechaInicio, fechaFinal, descripcion, tipo, precio });
+    const hotelGuardaEvento = await Hotel.findByIdAndUpdate(hotel_id._id, {
+      $push: { eventos: [eventoGuardadoDB._id] },
+    });
+    await eventoGuardadoDB.save();
+    res.json({
+      msg: 'Post Api - Agregando Evento',
+      eventoGuardadoDB
+    });
+  }
+ 
+ 
 
 }
 

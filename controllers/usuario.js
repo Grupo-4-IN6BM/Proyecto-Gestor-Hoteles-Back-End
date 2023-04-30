@@ -1,6 +1,7 @@
 const {response, request} = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
+const Reservacion = require('../models/reservacion');
 const getUsuarios = async (req = request, res = response) => {
 
     //condiciones del get
@@ -26,8 +27,7 @@ const postUsuario = async (req = request, res = response) => {
     usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
 
     await usuarioGuardadoDB.save();
-    res.json({
-        msg: 'Post Api - Post Usuario',
+    res.status(201).json({
         usuarioGuardadoDB
     });
 

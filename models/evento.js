@@ -32,7 +32,7 @@ const EventoSchema = Schema({
     img:{
         type: String,
         default: 'Sin imagen'
-    }
+    },
 });
 
 module.exports = model('Evento', EventoSchema);

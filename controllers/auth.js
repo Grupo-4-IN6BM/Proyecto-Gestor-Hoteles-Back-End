@@ -6,7 +6,7 @@ const Usuario = require('../models/usuario');
 const login = async (req = request, res = response) => {
 
     const { correo, password } = req.body;
-
+    console.log(req.body)
     try {
 
         //Verficiar si el email existe
