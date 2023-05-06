@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getReservaciones, getReservacionPorId, postReservacion, putReservacion, deleteReservacion, putAgregarPersona, deleteMiReservacion, putMiReservacion } = require('../controllers/reservacion');
+const { getReservaciones, getReservacionPorId, postReservacion, putReservacion, deleteReservacion, putAgregarPersona, deleteMiReservacion, putMiReservacion, agregarHabitacion } = require('../controllers/reservacion');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { tieneRole } = require('../middlewares/validar-roles');
@@ -24,6 +24,11 @@ router.get('/reservacion/:nombre', [
     tieneRole('ROL_ADMINISTRATIVO'),
     validarCampos
 ], getReservacionPorId);
+
+router.post('/agregarHabitacion/:id',[
+    validarJWT,
+    validarCampos
+],agregarHabitacion);
 
 router.post('/agregar', [
     validarJWT,

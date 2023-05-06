@@ -4,20 +4,16 @@ const Evento = require('../models/evento');
 const Hotel = require('../models/hotel');
 
 const getEventos = async (req = request, res = response) => {
-
-  const query = { disponibilidad: true };
-
-  const listaEventos = await Promise.all([
-    Evento.countDocuments(query),
-    Evento.find(query),
-  ]);
-
-  res.json({
-    msg: "get Api - Controlador Empresa",
-    listaEventos,
-  });
+  const listaEventos = await Evento.find({disponibilidad: true}).populate("hotel", "nombre")
+  res.status(201).json(listaEventos);
 };
 
+const getEventosId = async (req = request, res = response) => {
+  const {id} = req.params;
+  const eventoID = await Evento.find({hotel: id}).populate('hotel', 'nombre')
+  console.log(eventoID)
+  res.status(201).json(eventoID);
+};
 
 const postEvento = async (req = request, res = response) => {
   const id = req.usuario.id;
@@ -85,6 +81,7 @@ const deleteEvento = async (req = request, res = response) => {
 
 module.exports = {
   getEventos,
+  getEventosId,
   postEvento,
   putEvento,
   deleteEvento

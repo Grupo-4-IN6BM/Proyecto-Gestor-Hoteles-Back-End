@@ -1,7 +1,7 @@
 //Importaciones
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getEventos, postEvento, putEvento, deleteEvento} = require('../controllers/evento');
+const { getEventos, postEvento, putEvento, deleteEvento, getEventosId} = require('../controllers/evento');
 const { esTipoValido, esFecha } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
@@ -10,6 +10,8 @@ const { tieneRole } = require('../middlewares/validar-roles');
 const router = Router();
 
 router.get('/mostrar', getEventos);
+
+router.get('/mostrar/:id', getEventosId);
 
 router.post('/registrarEvento', [
     validarJWT,

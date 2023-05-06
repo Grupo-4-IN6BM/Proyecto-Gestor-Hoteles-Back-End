@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUsuarios, postUsuario, putUsuario, deleteUsuario, deleteMiUsuario } = require('../controllers/usuario');
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario, deleteMiUsuario, getUsuarioPorToken } = require('../controllers/usuario');
 const { emailExiste, esRoleValido, existeUsuarioPorId, identificacionExiste } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
@@ -9,6 +9,8 @@ const { tieneRole } = require('../middlewares/validar-roles');
 const router = Router();
 
 router.get('/mostrar', getUsuarios);
+
+router.get('/mostrar/:token', getUsuarioPorToken);
 
 router.post('/agregarAdmin', [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),

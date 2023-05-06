@@ -8,22 +8,25 @@ const getHabitaciones = async (req = request, res = response) => {
     //condiciones del get
     const query = { disponibilidad: true };
 
-    const listaHabitaciones = await Promise.all([
-        Habitacion.countDocuments(query),
-        Habitacion.find(query).populate('hotel', 'nombre')
-    ]);
-
-    res.json({
-        listaHabitaciones
-    });
+    const habitaciones = await Habitacion.find({disponibilidad: true}).populate('hotel', 'nombre')
+    console.log(habitaciones)
+    res.status(201).json(habitaciones);
 
 }
+const getHabitacionesPorIdHotel = async (req = request, res = response) => {
+    const {id} = req.params;
+    const habitacionId = await Habitacion.find({hotel: id}).populate('hotel', 'nombre')
+    res.status(201).json(habitacionId);
+
+}
+
 const getHabitacionesPorId = async (req = request, res = response) => {
     const {id} = req.params;
-    const hotelId = await Habitacion.findById(id).populate('hotel', 'nombre')
-    res.status(201).json(hotelId);
+    const habitacionId = await Habitacion.findById(id).populate('hotel', 'nombre')
+    res.status(201).json(habitacionId);
 
 }
+
 const postHabitacion = async (req = request, res = response) => {
     const id = req.usuario.id
     const { numero, costo, descripcion, capacidad, ...resto} = req.body;
@@ -85,6 +88,7 @@ module.exports = {
     getHabitaciones,
     getHabitacionesPorId,
     postHabitacion,
+    getHabitacionesPorIdHotel,
     putHabitacion,
     deleteHabitacion
 }

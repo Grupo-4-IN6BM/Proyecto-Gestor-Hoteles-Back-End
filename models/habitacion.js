@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const HabitacionSchema = Schema({
+    tipo:{
+        type: String,
+        required: [true, 'El tipo de la habitacion es necesario']
+    },
     numero: {
         type: Number,
         required: [true, 'El número de habitación es obligatorio']

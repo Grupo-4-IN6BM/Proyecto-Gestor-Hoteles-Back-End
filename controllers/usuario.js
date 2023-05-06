@@ -2,6 +2,7 @@ const {response, request} = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const Reservacion = require('../models/reservacion');
+const jwt = require('jsonwebtoken');
 const getUsuarios = async (req = request, res = response) => {
 
     //condiciones del get
@@ -18,6 +19,17 @@ const getUsuarios = async (req = request, res = response) => {
     });
 
 }
+const getUsuarioPorToken = async (req = request, res = response) => {
+
+    const {token} = req.params;
+
+    const { uid } = jwt.verify( token, process.env.SECRET_KEY_FOR_TOKEN);
+
+    const listaUsuarios = await Usuario.findById(uid);
+    console.log(listaUsuarios)
+    res.status(201).json(listaUsuarios);
+
+}
 
 const postUsuario = async (req = request, res = response) => {
     const { nombre, edad, correo, password, identificacion, rol, ...resto } = req.body;
@@ -25,7 +37,8 @@ const postUsuario = async (req = request, res = response) => {
 
     const salt = bcrypt.genSaltSync();
     usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
-
+    const reservacionAuto = new Reservacion( {usuario: usuarioGuardadoDB._id})
+    await reservacionAuto.save();
     await usuarioGuardadoDB.save();
     res.status(201).json({
         usuarioGuardadoDB
@@ -125,5 +138,6 @@ module.exports = {
     postUsuario,
     putUsuario,
     deleteUsuario,
-    deleteMiUsuario
+    deleteMiUsuario,
+    getUsuarioPorToken
 }

@@ -132,7 +132,7 @@ const buscarHoteles = async( termino = '', res = response) => {
         $or: [ { nombre: regex }, { pais: regex } ],
         $and: [ { estado: true } ]
     });
-    console.log("hola")
+    console.log(hoteles)
     res.json({
         results: hoteles
     })

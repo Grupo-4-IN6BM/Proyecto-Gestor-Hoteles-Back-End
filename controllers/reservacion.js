@@ -50,6 +50,15 @@ const getReservacionPorId = async (req = request, res = response) => {
 }
 
 
+const agregarHabitacion = async (req, res) => {
+    const idUsuario = req.usuario.id;
+    const {id} = req.params;
+    const idReservacion = await Reservacion.findOne({usuario: idUsuario})
+    console.log("RESERVACION" ,idReservacion)
+    const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, {$push:{habitaciones:[id]}})
+    res.status(201).json(agregaHabitacion)
+}
+
 const postReservacion = async (req = request, res = response) => {
     const id = req.usuario.id;
     const { habitaciones, servicios, eventos, fechaInicio, fechaFinal, cantidadPersonas, personaReserva, ...body } = req.body;
@@ -525,6 +534,7 @@ module.exports = {
     getReservaciones,
     getReservacionPorId,
     postReservacion,
+    agregarHabitacion,
     putReservacion,
     deleteReservacion,
     deleteMiReservacion,

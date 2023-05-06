@@ -8,21 +8,17 @@ const getServicio = async (req = request, res = response) => {
   //condiciones del get
   const query = { estado: true };
 
-  const listaServicios = await Promise.all([
-    Servicio.countDocuments(query),
-    Servicio.find(query),
-  ]);
-
+  const servicioId = await Servicio.find({estado: true})
+  
   res.json({
-    msg: "get Api - Controlador servicio",
-    listaServicios,
+    servicioId
   });
 };
 
 const postServicio = async (req = request, res = response) => {
   const id = req.usuario.id;
   //Desestructuración
-  const { nombre, precio, descripcion } = req.body;
+  const { nombre, precio, descripcion , img} = req.body;
   const hotel_id = await Hotel.findOne({ administrador: id });
   const buscar = await Servicio.findOne({ nombre: nombre });
   var hotel = hotel_id._id;
@@ -36,6 +32,7 @@ const postServicio = async (req = request, res = response) => {
       precio: precio,
       descripcion: descripcion,
       hotel: id,
+      img: img
     });
     const hotelGuardaServicio = await Hotel.findByIdAndUpdate(hotel_id._id, {
       $push: { servicios: [servicioGuardadoDB._id] },

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getHabitaciones, postHabitacion, putHabitacion, deleteHabitacion, getHabitacionesPorId } = require('../controllers/habitacion');
+const { getHabitaciones, postHabitacion, putHabitacion, deleteHabitacion, getHabitacionesPorId, getHabitacionesPorIdHotel } = require('../controllers/habitacion');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
@@ -10,6 +10,10 @@ const router = Router();
 router.get('/mostrar', getHabitaciones);
 
 router.get('/mostrar/:id',[
+    check('id', 'No es un ID válido').isMongoId(),
+], getHabitacionesPorIdHotel);
+
+router.get('/mostrarID/:id',[
     check('id', 'No es un ID válido').isMongoId(),
 ], getHabitacionesPorId);
 
