@@ -4,15 +4,15 @@ const Evento = require('../models/evento');
 const Hotel = require('../models/hotel');
 
 const getEventos = async (req = request, res = response) => {
-  const listaEventos = await Evento.find({disponibilidad: true}).populate("hotel", "nombre")
+  const listaEventos = await Evento.find({disponibilidad: true})
   res.status(201).json(listaEventos);
 };
 
 const getEventosId = async (req = request, res = response) => {
   const {id} = req.params;
-  const eventoID = await Evento.find({hotel: id}).populate('hotel', 'nombre')
-  console.log(eventoID)
-  res.status(201).json(eventoID);
+  const eventoId = await Evento.findOne({_id: id})
+  console.log(eventoId)
+  res.status(201).json(eventoId);
 };
 
 const postEvento = async (req = request, res = response) => {

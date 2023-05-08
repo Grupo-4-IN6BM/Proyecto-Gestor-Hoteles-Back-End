@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getReservaciones, getReservacionPorId, postReservacion, putReservacion, deleteReservacion, putAgregarPersona, deleteMiReservacion, putMiReservacion, agregarHabitacion } = require('../controllers/reservacion');
+const { getReservaciones, getReservacionPorId, postReservacion, putReservacion, deleteReservacion, putAgregarPersona, deleteMiReservacion, putMiReservacion, agregarHabitacion, agregarServicio, agregarEvento, getMiReservacion } = require('../controllers/reservacion');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { tieneRole } = require('../middlewares/validar-roles');
@@ -14,10 +14,10 @@ router.get('/', [
     validarCampos
 ], getReservaciones);
 
-router.get('/detalleCuenta', [
+router.get('/miReservacion', [
     validarJWT,
     validarCampos
-], getReservacionPorId);
+], getMiReservacion);
 
 router.get('/reservacion/:nombre', [
     validarJWT,
@@ -29,6 +29,16 @@ router.post('/agregarHabitacion/:id',[
     validarJWT,
     validarCampos
 ],agregarHabitacion);
+
+router.post('/agregarServicios/:id',[
+    validarJWT,
+    validarCampos
+],agregarServicio);
+
+router.post('/agregarEventos/:id',[
+    validarJWT,
+    validarCampos
+],agregarEvento);
 
 router.post('/agregar', [
     validarJWT,

@@ -15,7 +15,7 @@ const getHabitaciones = async (req = request, res = response) => {
 }
 const getHabitacionesPorIdHotel = async (req = request, res = response) => {
     const {id} = req.params;
-    const habitacionId = await Habitacion.find({hotel: id}).populate('hotel', 'nombre')
+    const habitacionId = await Habitacion.find({hotel: id} && {disponibilidad: true} ).populate('hotel', 'nombre')
     res.status(201).json(habitacionId);
 
 }

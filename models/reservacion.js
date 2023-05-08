@@ -11,12 +11,15 @@ const ReservacionSchema = Schema({
     },
     cantidadPersonas: {
         type: Number,
+        default: 0
     },
     fechaInicio: {
         type: Date,
+        default: Date.now()
     },
     fechaFinal: {
         type: Date,
+        default: Date.now()
     },
     habitaciones: [{
         type: Schema.Types.ObjectId,
@@ -24,6 +27,7 @@ const ReservacionSchema = Schema({
     }],
     dias_habitaciones:{
         type: Number,
+        default: 0
     },
     servicios: [{
         type: Schema.Types.ObjectId,
@@ -38,7 +42,8 @@ const ReservacionSchema = Schema({
         ref: 'Hotele',
     },
     total:{
-        type: Number
+        type: Number,
+        default: 0
     }
 });
 

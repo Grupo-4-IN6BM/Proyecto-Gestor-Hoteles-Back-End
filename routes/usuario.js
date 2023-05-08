@@ -46,6 +46,9 @@ router.put('/editarMiUsuario', [
     validarCampos
 ] ,putUsuario);
 
+// router.put('/editar/:id', [
+//     validarCampos
+// ] ,putUsuario);
 router.put('/editar/:id', [
     validarJWT,
     tieneRole('ROL_ADMINISTRATIVO'),

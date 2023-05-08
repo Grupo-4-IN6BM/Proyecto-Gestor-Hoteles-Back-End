@@ -8,15 +8,10 @@ const getUsuarios = async (req = request, res = response) => {
     //condiciones del get
     const query = { estado: true };
 
-    const listaUsuarios = await Promise.all([
-        Usuario.countDocuments(query),
-        Usuario.find(query)
-    ]);
+    const listaUsuarios = await Usuario.find({estado:true})
 
-    res.json({
-        msg: 'get Api - Controlador Usuario',
-        listaUsuarios
-    });
+    res.status(201).json(
+        listaUsuarios);
 
 }
 const getUsuarioPorToken = async (req = request, res = response) => {
@@ -46,25 +41,18 @@ const postUsuario = async (req = request, res = response) => {
 
 }
 
-const putMiUsuario = async (req = request, res = response) => {
+const putUsuario = async (req = request, res = response) => {
     const {id} = req.params;
-    const { _id, estado, ...resto } = req.body;
+    const profileEdit = { ...req.body };
+    console.log("profileEdit", profileEdit)
+    const usuarioEditado = await Usuario.findByIdAndUpdate(id, {nombre: profileEdit.nombre.nombre,
+        correo: profileEdit.nombre.correo}, {new: true});
 
-    if ( resto.password ) {
-        const salt = bcrypt.genSaltSync();
-        resto.password = bcrypt.hashSync(resto.password, salt);
-    }
-
-    const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto, {new: true});
-
-    res.json({
-        msg: 'PUT editar user',
-        usuarioEditado
-    });
+    res.status(201).json(usuarioEditado);
 
 }
 
-const putUsuario = async (req = request, res = response) => {
+const putMiUsuario = async (req = request, res = response) => {
     const id = req.usuario.id;
     const { _id, estado, ...resto } = req.body;
 

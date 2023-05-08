@@ -22,7 +22,14 @@ const getReservaciones = async (req = request, res = response) => {
 
 }
 
-
+const getMiReservacion = async (req = request, res = response) => {
+    const id = req.usuario.id;
+    const reservacion = await Reservacion.find({usuario:id}).populate('usuario', 'nombre')
+    .populate('habitaciones', 'img tipo numero costo')
+    .populate('servicios', 'img nombre precio descripcion')
+    .populate('eventos', 'img nombre precio');
+    res.status(201).json(reservacion);
+}
 
 const getReservacionesPorNombre = async (req = request, res = response) => {
     const { nombre } = req.params;
@@ -52,11 +59,33 @@ const getReservacionPorId = async (req = request, res = response) => {
 
 const agregarHabitacion = async (req, res) => {
     const idUsuario = req.usuario.id;
+    console.log("ID",idUsuario);
     const {id} = req.params;
     const idReservacion = await Reservacion.findOne({usuario: idUsuario})
     console.log("RESERVACION" ,idReservacion)
     const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, {$push:{habitaciones:[id]}})
+    const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(id, { disponibilidad: false })
     res.status(201).json(agregaHabitacion)
+}
+
+const agregarServicio = async (req, res) => {
+    const idUsuario = req.usuario.id;
+    console.log("ID",idUsuario);
+    const {id} = req.params;
+    const idReservacion = await Reservacion.findOne({usuario: idUsuario})
+    console.log("RESERVACION" ,idReservacion)
+    const agregaServicio = await Reservacion.findByIdAndUpdate(idReservacion._id, {$push:{servicios:[id]}})
+    res.status(201).json(agregaServicio)
+}
+
+const agregarEvento = async (req, res) => {
+    const idUsuario = req.usuario.id;
+    console.log("ID",idUsuario);
+    const {id} = req.params;
+    const idReservacion = await Reservacion.findOne({usuario: idUsuario})
+    console.log("RESERVACION" ,idReservacion)
+    const agregarEvento = await Reservacion.findByIdAndUpdate(idReservacion._id, {$push:{eventos:[id]}})
+    res.status(201).json(agregarEvento)
 }
 
 const postReservacion = async (req = request, res = response) => {
@@ -540,4 +569,7 @@ module.exports = {
     deleteMiReservacion,
     getReservacionesPorNombre,
     putMiReservacion,
+    agregarServicio,
+    agregarEvento,
+    getMiReservacion
 }

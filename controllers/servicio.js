@@ -15,6 +15,12 @@ const getServicio = async (req = request, res = response) => {
   });
 };
 
+const getServicioId = async (req = request, res = response) => {
+  const {id} = req.params
+  const servicioId = await Servicio.findById(id)
+  res.status(201).json(servicioId);
+};
+
 const postServicio = async (req = request, res = response) => {
   const id = req.usuario.id;
   //Desestructuración
@@ -95,6 +101,7 @@ const deleteServicio = async (req = request, res = response) => {
 
 module.exports = {
   getServicio,
+  getServicioId,
   postServicio,
   putServicio,
   deleteServicio,

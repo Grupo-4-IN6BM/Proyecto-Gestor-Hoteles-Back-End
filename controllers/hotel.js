@@ -2,9 +2,8 @@ const {response, request} = require('express');
 
 const Hotel = require('../models/hotel');
 const Usuario = require('../models/usuario');
-const getHoteles = async (req = request, res = response) => {
 
-    const query = { estado: true };
+const getHoteles = async (req = request, res = response) => {;
 
     const listaHoteles = await Hotel.find({estado: true}).populate("habitaciones", "numero costo descripcion")
         .populate("eventos", "nombre precio")
