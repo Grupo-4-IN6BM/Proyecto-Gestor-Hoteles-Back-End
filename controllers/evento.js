@@ -17,7 +17,7 @@ const getEventosId = async (req = request, res = response) => {
 
 const postEvento = async (req = request, res = response) => {
   const id = req.usuario.id;
-  const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio } = req.body;
+  const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio, img } = req.body;
   const hotel_id = await Hotel.findOne({ administrador: id });
   var hotel = hotel_id._id;
 
@@ -27,7 +27,7 @@ const postEvento = async (req = request, res = response) => {
       msg: `El evento con el nombre ${buscar.nombre} ya existe en la DB`
     })
   }else{
-    const eventoGuardadoDB = new Evento({ nombre, fechaInicio, fechaFinal, descripcion, tipo, precio });
+    const eventoGuardadoDB = new Evento({ nombre, fechaInicio, fechaFinal, descripcion, tipo, precio, img });
     const hotelGuardaEvento = await Hotel.findByIdAndUpdate(hotel_id._id, {
       $push: { eventos: [eventoGuardadoDB._id] },
     });

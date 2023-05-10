@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const generarJWT = ( uid = '' ) => {
     return new Promise( (resolve, reject) => {
-        const payload = { uid }
+        const payload = { uid } //Mandar a llamar al rol
 
         jwt.sign( payload, process.env.SECRET_KEY_FOR_TOKEN, {
             expiresIn: '180h'
