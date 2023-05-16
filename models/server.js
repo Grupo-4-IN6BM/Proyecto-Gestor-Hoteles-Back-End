@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConection } = require('../database/config');
-
+const {roles} = require('../controllers/usuario')
 class Server {
 
     constructor() {
@@ -38,6 +38,7 @@ class Server {
     //Función de conexión
     async conectarDB() {
         await dbConection();
+        await roles()
     }
 
     //Un middleware es una función que se ejecuta antes de las rutas

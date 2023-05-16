@@ -1,10 +1,8 @@
 const {response, request} = require('express');
 
 const Hotel = require('../models/hotel');
-const Usuario = require('../models/usuario');
 
 const getHoteles = async (req = request, res = response) => {;
-
     const listaHoteles = await Hotel.find({estado: true}).populate("habitaciones", "numero costo descripcion")
         .populate("eventos", "nombre precio")
         .populate("servicios", "nombre precio descripcion")
@@ -14,13 +12,11 @@ const getHoteles = async (req = request, res = response) => {;
     res.json({
         listaHoteles
     });
-
 }
 
 const getHotelesPorId = async (req = request, res = response) => {
     const { id } = req.params;
     const query = { _id: id, estado: true };
-
     const listaHoteles = await Promise.all([
         Hotel.countDocuments(query),
         Hotel.find(query).populate("habitaciones", "numero costo descripcion")
@@ -54,19 +50,30 @@ const getHotelesPorNombre = async (req = request, res = response) => {
 
 }
 
-const postHoteles = async (req = request, res = response) => {
+const postHotelesAdmin = async (req = request, res = response) => {
     const administrador = req.usuario.id
-    const { nombre, pais, direccion, ...resto} = req.body;
-
+    const { nombre, pais, direccion, longitud, latitud, ...resto} = req.body;
     const buscarAdmin = await Hotel.findOne({administrador: administrador})
-
     if(buscarAdmin){
         res.status(400).json({
             msg: `El administrador ${buscarAdmin.administrador}, ya es administrador de un hotel`
         })
     }else{
-        const hotelGuardadoDB = new Hotel({ nombre,pais,direccion,administrador,...resto });
+        const hotelGuardadoDB = new Hotel({ nombre,pais,direccion,administrador,longitud, latitud,...resto });
+    await hotelGuardadoDB.save();
+    res.status(201).json(hotelGuardadoDB)
+    }
+}
 
+const postHotelesSuperAdmin = async (req = request, res = response) => {
+    const { nombre, pais, direccion, longitud, latitud,img, administrador, ...resto} = req.body;
+    const buscarAdmin = await Hotel.findOne({administrador: administrador})
+    if(buscarAdmin){
+        res.status(400).json({
+            msg: `El administrador ${buscarAdmin.administrador}, ya es administrador de un hotel`
+        })
+    }else{
+        const hotelGuardadoDB = new Hotel({ nombre,pais,direccion,administrador,longitud, latitud,...resto });
     await hotelGuardadoDB.save();
     res.status(201).json(hotelGuardadoDB)
     }
@@ -75,33 +82,26 @@ const postHoteles = async (req = request, res = response) => {
 const putHotel = async (req = request, res = response) => {
     const { id } = req.params;
     const { ...resto } = req.body;
-
     const hotelEditado = await Hotel.findByIdAndUpdate(id, resto, {new: true});
-
     res.status(201).json(hotelEditado)
-
 }
+
 
 const agregarTrabajadores = async (req = request, res = response) => {
     const { id } = req.params;
     const { trabajadores } = req.body;
-
     const hotelEditado = await Hotel.findByIdAndUpdate(id, {$push:{trabajadores:[trabajadores]}}, {new: true});
-
     res.status(201).json(hotelEditado)
-
 }
 
 const deshabilitarHotel = async(req = request, res = response) => {
     const { id } = req.params;
-  
     const hotelDeshabilitado = await Hotel.findByIdAndUpdate(id, {estado: false}, {new: true});
     res.status(201).json(hotelDeshabilitado)
 }
 
 const eliminarHotel = async(req = request, res = response) => {
     const { id } = req.params;
-  
     const hotelEliminado = await Hotel.findByIdAndDelete(id, {new: true});
     res.status(201).json(hotelEliminado)
 }
@@ -110,7 +110,8 @@ module.exports = {
     getHoteles,
     getHotelesPorId,
     getHotelesPorNombre,
-    postHoteles,
+    postHoteles: postHotelesAdmin,
+    postHotelesSuperAdmin,
     putHotel,
     deshabilitarHotel,
     eliminarHotel,

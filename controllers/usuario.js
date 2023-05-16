@@ -1,131 +1,120 @@
-const {response, request} = require('express');
+const { response, request } = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const Reservacion = require('../models/reservacion');
 const jwt = require('jsonwebtoken');
+const Role = require('../models/role');
+
 const getUsuarios = async (req = request, res = response) => {
-
-    //condiciones del get
-    const query = { estado: true };
-
-    const listaUsuarios = await Usuario.find({estado:true})
-
-    res.status(201).json(
-        listaUsuarios);
-
+    const listaUsuarios = await Usuario.find({ estado: true })
+    res.status(201).json(listaUsuarios);
 }
+
 const getUsuarioPorToken = async (req = request, res = response) => {
-
-    const {token} = req.params;
-
-    const { uid } = jwt.verify( token, process.env.SECRET_KEY_FOR_TOKEN);
-
+    const { token } = req.params;
+    const { uid } = jwt.verify(token, process.env.SECRET_KEY_FOR_TOKEN);
     const listaUsuarios = await Usuario.findById(uid);
     console.log(listaUsuarios)
     res.status(201).json(listaUsuarios);
-
 }
 
-const postUsuario = async (req = request, res = response) => {
-    const { nombre, edad, correo, password, identificacion, rol, ...resto } = req.body;
+const postUsuarioRegistro = async (req = request, res = response) => {
+    let rol = "ROL_CLIENTE"
+    const { nombre, edad, correo, password, identificacion, ...resto } = req.body;
     const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, rol, ...resto });
-
     const salt = bcrypt.genSaltSync();
     usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
-    const reservacionAuto = new Reservacion( {usuario: usuarioGuardadoDB._id})
+    const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
     await reservacionAuto.save();
     await usuarioGuardadoDB.save();
     res.status(201).json({
         usuarioGuardadoDB
     });
-
 }
 
-const putUsuario = async (req = request, res = response) => {
-    const {id} = req.params;
-    const profileEdit = { ...req.body };
-    console.log("profileEdit", profileEdit)
-    const usuarioEditado = await Usuario.findByIdAndUpdate(id, {nombre: profileEdit.nombre.nombre,
-        correo: profileEdit.nombre.correo}, {new: true});
+const postUsuarioSuperAdmin = async (req = request, res = response) => {
+    const { nombre, edad, correo, password, identificacion, rol, ...resto } = req.body;
+    const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, rol, ...resto });
+    const salt = bcrypt.genSaltSync();
+    usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
+    const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
+    await reservacionAuto.save();
+    await usuarioGuardadoDB.save();
+    res.status(201).json({
+        usuarioGuardadoDB
+    });
+}
 
+const putMiUsuario = async (req = request, res = response) => {
+    console.log("hola")
+    const id = req.usuario.id;
+    const {nombre, correo, identificacion, edad} = req.body;
+    const usuarioEditado = await Usuario.findByIdAndUpdate(id, {
+        nombre: nombre,
+        correo: correo,
+        identificacion: identificacion,
+        edad: edad  
+    }, { new: true });
     res.status(201).json(usuarioEditado);
 
 }
 
-const putMiUsuario = async (req = request, res = response) => {
+const putUsuarioSuperAdmin = async (req = request, res = response) => {
     const id = req.usuario.id;
     const { _id, estado, ...resto } = req.body;
-
-    if ( resto.password ) {
+    if (resto.password) {
         const salt = bcrypt.genSaltSync();
         resto.password = bcrypt.hashSync(resto.password, salt);
     }
-
-    const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto, {new: true});
-
+    const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto, { new: true });
     res.json({
-        msg: 'PUT editar user',
         usuarioEditado
     });
-
 }
 
-const deleteMiUsuario = async(req = request, res = response) => {
+const deleteMiUsuario = async (req = request, res = response) => {
     const id = req.usuario.id;
-  
-    const usuarioEliminado = await Usuario.findByIdAndDelete( id, {new: true});
-        res.status(201).json(usuarioEliminado);
+    const usuarioEliminado = await Usuario.findByIdAndDelete(id, { new: true });
+    res.status(201).json(usuarioEliminado);
 }
 
-const deleteUsuario = async(req = request, res = response) => {
+const deleteUsuariosSuperAdmin = async (req = request, res = response) => {
     const { id } = req.params;
     const usuarioEliminado = await Usuario.findById(id);
-    if(usuarioEliminado.rol != "ROL_ADMINISTRATIVO"){
-        const eliminado = await Usuario.findByIdAndDelete( id, {new: true});
-        res.status(201).json(eliminado); 
-    }else{
-        res.status(401).json({
-            msg: "Un administrador no puede eliminar a otro"
-        })
-    }
+    const eliminado = await Usuario.findByIdAndDelete(id, { new: true });
+    res.status(201).json(eliminado);
 }
 
-// const putAdmin = async (req = request, res = response) => {
-//     const idAdmin = req.usuario.id;
-//     const { _id, img, estado, google, ...resto } = req.body;
-
-//     if ( resto.password ) {
-//         //Encriptar password
-//         const salt = bcrypt.genSaltSync();
-//         resto.password = bcrypt.hashSync(resto.password, salt);
-//     }
-
-//     const usuarioEditado = await Usuario.findByIdAndUpdate(idAdmin, resto, {new: true});
-
-//     res.json({
-//         msg: 'PUT editar user',
-//         usuarioEditado
-//     });
-
-// }
-
-// const deleteAdmin = async(req = request, res = response) => {
-//     const idAdmin = req.usuario.id;
-    
-//     //Eliminar cambiando el estado a false
-//     const usuarioEliminado = await Usuario.findByIdAndUpdate(idAdmin, { estado: false });
-
-//     res.json({
-//         msg: 'DELETE eliminar user',
-//         usuarioEliminado
-//     });
-// }
+const roles = async (req, res) => {
+    try {
+        let role = new Role();
+        let role2 = new Role();
+        let role3 = new Role();
+        role.rol = "ROL_ADMINISTRATIVO";
+        role2.rol = "ROL_CLIENTE"
+        role3.rol = "ROL_SUPERADMIN"
+        const rolBusca = await Role.findOne({ rol: role.rol })
+        if (rolBusca != null) {
+            return console.log("LOS ROLES ESTAN LISTOS");
+        } else {
+            rol1 = await role.save();
+            rol2 = await role2.save();
+            rol3 = await role3.save();
+            if (!rol1 && !rol2 && !rol3) return console.log("LOS ROLES NO ESTAN LISTOS");
+            return console.log("LOS ROLES ESTAN LISTOS");
+        }
+    } catch (err) {
+        throw new Error(err);
+    }
+};
 
 module.exports = {
     getUsuarios,
-    postUsuario,
-    putUsuario,
-    deleteUsuario,
+    postUsuario: postUsuarioRegistro,
+    putUsuario: putMiUsuario,
+    deleteUsuario: deleteUsuariosSuperAdmin,
     deleteMiUsuario,
-    getUsuarioPorToken
+    roles,
+    getUsuarioPorToken,
+    postUsuarioSuperAdmin
 }

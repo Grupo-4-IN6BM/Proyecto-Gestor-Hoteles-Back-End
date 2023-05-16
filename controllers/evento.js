@@ -17,9 +17,8 @@ const getEventosId = async (req = request, res = response) => {
 
 const postEvento = async (req = request, res = response) => {
   const id = req.usuario.id;
-  const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio, img } = req.body;
-  const hotel_id = await Hotel.findOne({ administrador: id });
-  var hotel = hotel_id._id;
+  console.log("ENTRE")
+  const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio, hotel, img } = req.body;
 
   const buscar = await Evento.findOne({nombre: nombre})
   if(buscar){
@@ -28,7 +27,7 @@ const postEvento = async (req = request, res = response) => {
     })
   }else{
     const eventoGuardadoDB = new Evento({ nombre, fechaInicio, fechaFinal, descripcion, tipo, precio, img });
-    const hotelGuardaEvento = await Hotel.findByIdAndUpdate(hotel_id._id, {
+    const hotelGuardaEvento = await Hotel.findByIdAndUpdate(hotel, {
       $push: { eventos: [eventoGuardadoDB._id] },
     });
     await eventoGuardadoDB.save();
@@ -64,7 +63,7 @@ const deleteEvento = async (req = request, res = response) => {
   const id_A = req.usuario.id;
   const {id} = req.params;
   const eventoEliminado = await Evento.findByIdAndDelete(id, {new: true})
-  const hotel_id = await Hotel.findOne({ administrador: id_A });
+  const hotel_id = await Hotel.findOne({ eventos: id });
   if (eventoEliminado != null) {
     const hotelEliminarHabitacion = await Hotel.findByIdAndUpdate(
       hotel_id._id,

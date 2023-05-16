@@ -25,9 +25,9 @@ const getReservaciones = async (req = request, res = response) => {
 const getMiReservacion = async (req = request, res = response) => {
     const id = req.usuario.id;
     const reservacion = await Reservacion.findOne({ usuario: id }).populate('usuario', 'nombre')
-        .populate('habitaciones', 'img tipo numero costo')
+        .populate('habitaciones', 'img tipo numero costo descripcion')
         .populate('servicios', 'img nombre precio descripcion')
-        .populate('eventos', 'img nombre precio');
+        .populate('eventos', 'img nombre precio descripcion');
     res.status(201).json(reservacion);
 }
 
@@ -35,13 +35,11 @@ const getReservacionesPorNombre = async (req = request, res = response) => {
     const { nombre } = req.params;
     const query = { personaReserva: nombre };
 
-    const listaReservaciones = await Promise.all([
-        Reservacion.countDocuments(query),
-        Reservacion.find(query).populate('usuario', 'nombre')
-            .populate('habitaciones', 'numero costo')
+    const listaReservaciones = await Reservacion.find(query).populate('usuario', 'nombre')
+            .populate('habitaciones', 'tipo numero costo descripcion')
             .populate('servicios', 'nombre precio descripcion')
-            .populate('eventos', 'nombre precio')
-    ]);
+            .populate('eventos', 'nombre precio descripcion')
+
 
     res.status(201).json(listaReservaciones);
 
@@ -65,9 +63,9 @@ const agregarHabitacion = async (req, res) => {
     console.log("RESERVACION", idReservacion)
     const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { habitaciones: [id] } })
     const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(id, { disponibilidad: false })
-    const buscaHotel = await Hotel.find({ habitaciones: id })
+    const buscaHotel = await Hotel.findOne({ habitaciones: id })
 
-    const aumentaReservacion = await Hotel.findByIdAndUpdate(buscaHotel[0]._id, { reservaciones: buscaHotel[0].reservaciones + 1 })
+    const aumentaReservacion = await Hotel.findByIdAndUpdate(buscaHotel._id, { reservaciones: buscaHotel.reservaciones + 1 })
     res.status(201).json(agregaHabitacion)
 }
 
@@ -111,6 +109,67 @@ const agregarEvento = async (req, res) => {
     const actualizarPrecio = await Reservacion.findByIdAndUpdate(idReservacion._id, { $inc: { total: parseFloat(totalE) } })
     res.status(201).json(agregarEvento)
 }
+
+const deleteHabitacion = async (req = request, res = response) => {
+    const idUsuario = req.usuario.id;
+    let totalH = 0;
+    const { id } = req.params;
+    try {
+      const habitacion = await Habitacion.findById(id);
+      if (!habitacion) {
+        return res.status(404).json({ mensaje: 'Habitación no encontrada' });
+      }
+      const idReserva = await Reservacion.findOne({ usuario: idUsuario });
+      let dias = idReserva.dias_habitaciones;
+      console.log(dias);
+      totalH = parseFloat(habitacion.costo) * parseFloat(dias);
+      const eliminarRegistro = await Reservacion.findByIdAndUpdate(
+        idReserva._id.toString(),
+        { $pull: { habitaciones: id }, $inc: { total: -parseFloat(totalH) } },
+        { new: true }
+      );
+      const cambioEstadoHabitacion = Habitacion.findByIdAndUpdate(
+        id,
+        { disponibilidad: true },
+        { new: true }
+      );
+      res.status(201).json(eliminarRegistro);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ mensaje: 'Error en el servidor' });
+    }
+  };
+  
+  const deleteServicio = async (req, res) => {
+    const idUsuario = req.usuario.id;
+    let totalS = 0;
+    const { id } = req.params;
+    const servicio = await Servicio.findById(id);
+    const idReserva = await Reservacion.findOne({ usuario: idUsuario });
+    totalS = parseFloat(servicio.precio);
+    const eliminarServicio = await Reservacion.findByIdAndUpdate(
+      idReserva,
+      { $pull: { servicios: id }, $inc: { total: -totalS } },
+      { new: true }
+    );
+    res.status(201).json(eliminarServicio);
+  };
+  
+  const deleteEvento = async (req, res) => {
+    const idUsuario = req.usuario.id;
+    let totalE = 0;
+    const { id } = req.params;
+    const evento = await Evento.findById(id);
+    const idReserva = await Reservacion.findOne({ usuario: idUsuario });
+    totalE = parseFloat(evento.precio);
+    const eliminarServicio = await Reservacion.findByIdAndUpdate(
+      idReserva,
+      { $pull: { eventos: id }, $inc: { total: -totalE } },
+      { new: true }
+    );
+    res.status(201).json(eliminarServicio);
+  };
+
 
 const postReservacion = async (req = request, res = response) => {
     const id = req.usuario.id;
@@ -634,6 +693,9 @@ module.exports = {
     getReservacionesPorNombre,
     putMiReservacion,
     agregarServicio,
+    deleteHabitacion,
     agregarEvento,
-    getMiReservacion
+    getMiReservacion,
+    deleteEvento, 
+    deleteServicio,
 }

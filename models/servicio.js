@@ -8,7 +8,6 @@ const ServicioSchema = Schema({
     precio: {
         type: Number,
         required: [true, 'El precio es obligatorio' ],
-        unique: true
     },
     estado: {
         type: Boolean,

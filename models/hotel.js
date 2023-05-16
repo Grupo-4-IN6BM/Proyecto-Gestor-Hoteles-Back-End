@@ -33,6 +33,10 @@ const HotelSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
     }],
+    clientes :[{
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+    }],
     habitaciones: [{
         type: Schema.Types.ObjectId,
         ref: 'Habitacione',
@@ -49,9 +53,11 @@ const HotelSchema = Schema({
         type: String,
         default: 'Sin imagen'
     },
-    location: {
-        lat: Number,
-        lng: Number
+    latitud:{
+        type: Number
+    },
+    longitud:{
+        type: Number
     },
     telefono: {
         type: String

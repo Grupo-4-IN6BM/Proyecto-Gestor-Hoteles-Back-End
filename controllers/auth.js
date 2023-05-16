@@ -6,7 +6,7 @@ const Usuario = require('../models/usuario');
 const login = async (req = request, res = response) => {
 
     const { correo, password } = req.body;
-    console.log(req.body)
+
     try {
 
         //Verficiar si el email existe
@@ -33,7 +33,7 @@ const login = async (req = request, res = response) => {
         }
 
         //Generar JWT
-        const token = await generarJWT( usuario.id );
+        const token = await generarJWT( usuario.id, usuario.rol );
         res.json({
             msg: 'Login PATH',
             correo, password,

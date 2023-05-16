@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
-const { getHotelesPorId, getHotelesPorNombre, postHoteles, putHotel, eliminarHotel, deshabilitarHotel, getHoteles } = require('../controllers/hotel');
+const { getHotelesPorId, getHotelesPorNombre, postHoteles, putHotel, eliminarHotel, deshabilitarHotel, getHoteles, postHotelesSuperAdmin } = require('../controllers/hotel');
 const { existeHotelPorNombre, existeHotelPorId } = require('../helpers/db-validators');
 
 const router = Router();
@@ -21,16 +21,22 @@ router.get('/buscarNombre/:nombre'
 
 router.post('/agregar/',[
     validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
     check('nombre', 'El nombre del hotel es obligatorio'),
     check('pais', 'El pais del hotel es obligatorio'),
     check('direccion', 'La direccion del hotel es obligatoria'),
     validarCampos
 ], postHoteles);
 
+router.post('/agregarSuperAdmin',[
+    validarJWT,
+    check('nombre', 'El nombre del hotel es obligatorio'),
+    check('pais', 'El pais del hotel es obligatorio'),
+    check('direccion', 'La direccion del hotel es obligatoria'),
+    validarCampos
+], postHotelesSuperAdmin);
+
 router.put('/editar/:id',[
     validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
     check('id', 'No es un id de Mongo Válido').isMongoId(),
     check('id').custom( existeHotelPorId ),
     check('nombre', 'El nombre del hotel es obligatorio'),
@@ -41,7 +47,6 @@ router.put('/editar/:id',[
 
 router.delete('/eliminar/:id',[
     validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
     check('id', 'No es un id de Mongo Válido').isMongoId(),
     check('id').custom( existeHotelPorId ),
     validarCampos

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUsuarios, postUsuario, putUsuario, deleteUsuario, deleteMiUsuario, getUsuarioPorToken } = require('../controllers/usuario');
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario, deleteMiUsuario, getUsuarioPorToken, postUsuarioSuperAdmin } = require('../controllers/usuario');
 const { emailExiste, esRoleValido, existeUsuarioPorId, identificacionExiste } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
@@ -37,12 +37,20 @@ router.post('/agregarUsuario', [
     validarCampos,
 ] ,postUsuario);
 
-router.put('/editarMiUsuario', [
-    validarJWT,
+router.post('/agregarSuperAdmin', [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('edad', 'La edad es Obligatoria').not().isEmpty(),
     check('password', 'El password debe de ser más de 6 digitos').isLength( { min: 6 } ),
+    check('correo', 'El correo no es valido').isEmail(),
+    check('correo').custom(emailExiste ),
     check('identificacion', 'La identificacion es obligatoria').not().isEmpty(),
+    check('identificacion').custom(identificacionExiste),
+    check('rol').default('ROL_SUPERADMIN').custom(esRoleValido),
+    validarCampos,
+] ,postUsuarioSuperAdmin);
+
+router.put('/editarMiUsuario', [
+    validarJWT,
     validarCampos
 ] ,putUsuario);
 

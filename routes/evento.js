@@ -15,7 +15,6 @@ router.get('/mostrar/:id', getEventosId);
 
 router.post('/registrarEvento', [
     validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('fechaInicio', 'La fecha inicial es obligatoria').not().isEmpty(),
     check('fechaInicio', ' Ingresa una fecha inicial valida').custom(esFecha),
@@ -31,7 +30,6 @@ router.post('/registrarEvento', [
 
 router.put('/editarEvento/:id', [
     validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('fechaInicio', 'La fecha inicial es obligatoria').not().isEmpty(),
     check('fechaInicio', ' Ingresa una fecha inicial valida').custom(esFecha),
@@ -46,7 +44,6 @@ router.put('/editarEvento/:id', [
 
 router.delete('/eliminarEvento/:id', [
      validarJWT,
-     tieneRole('ROL_ADMINISTRATIVO'),
      check('id', 'No es un ID válido').isMongoId(),
      validarCampos,
 ] ,deleteEvento);

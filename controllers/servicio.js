@@ -5,12 +5,8 @@ const Servicio = require("../models/servicio");
 const Hotel = require("../models/hotel");
 
 const getServicio = async (req = request, res = response) => {
-  //condiciones del get
-  const query = { estado: true };
-
   const servicioId = await Servicio.find({estado: true})
-  
-  res.json({
+  res.status(201).json({
     servicioId
   });
 };
@@ -21,13 +17,11 @@ const getServicioId = async (req = request, res = response) => {
   res.status(201).json(servicioId);
 };
 
-const postServicio = async (req = request, res = response) => {
+const postServicioAdmin = async (req = request, res = response) => {
   const id = req.usuario.id;
-  //Desestructuración
   const { nombre, precio, descripcion , img} = req.body;
   const hotel_id = await Hotel.findOne({ administrador: id });
   const buscar = await Servicio.findOne({ nombre: nombre });
-  var hotel = hotel_id._id;
   if (buscar) {
     return res.status(400).json({
       msg: `El servicio con el nombre ${buscar.nombre} ya existe en la DB`
@@ -37,10 +31,10 @@ const postServicio = async (req = request, res = response) => {
       nombre: nombre,
       precio: precio,
       descripcion: descripcion,
-      hotel: id,
+      hotel: hotel_id.id,
       img: img
     });
-    const hotelGuardaServicio = await Hotel.findByIdAndUpdate(hotel_id._id, {
+    const hotelGuardaServicio = await Hotel.findByIdAndUpdate(hotel_id.id, {
       $push: { servicios: [servicioGuardadoDB._id] },
     });
     await servicioGuardadoDB.save();
@@ -51,10 +45,35 @@ const postServicio = async (req = request, res = response) => {
   };
 }
 
+const postServicioSuperAdmin = async (req = request, res = response) => {
+  const id = req.usuario.id;
+  const { nombre, precio, descripcion, hotel , img} = req.body;;
+  const buscar = await Servicio.findOne({ nombre: nombre });
+  if (buscar) {
+    return res.status(400).json({
+      msg: `El servicio con el nombre ${buscar.nombre} ya existe en la DB`
+    })
+  } else {
+    const servicioGuardadoDB = new Servicio({
+      nombre: nombre,
+      precio: precio,
+      descripcion: descripcion,
+      hotel: hotel,
+      img: img
+    });
+    const hotelGuardaServicio = await Hotel.findByIdAndUpdate(hotel, {
+      $push: { servicios: [servicioGuardadoDB._id] },
+    });
+    await servicioGuardadoDB.save();
+
+    res.status(201).json({
+      servicioGuardadoDB,
+    });
+  };
+}
 
 const putServicio = async (req = request, res = response) => {
   const idHotel = req.usuario.id;
-  //Req.params sirve para traer parametros de las rutas
   const { id } = req.params;
   const { _id, nombre, precio, descripcion } = req.body;
   const buscar = await Servicio.findOne({ nombre: nombre });
@@ -70,7 +89,6 @@ const putServicio = async (req = request, res = response) => {
         nombre: nombre,
         precio: precio,
         descripcion: descripcion,
-        hotel: idHotel,
       },
       { new: true }
     );
@@ -82,7 +100,7 @@ const putServicio = async (req = request, res = response) => {
 
 };
 
-const deleteServicio = async (req = request, res = response) => {
+const deleteServicioAdmin = async (req = request, res = response) => {
   const { id } = req.params;
   const id_A = req.usuario.id;
   const servicioEliminado = await Servicio.findByIdAndDelete(id, { new: true });
@@ -93,7 +111,20 @@ const deleteServicio = async (req = request, res = response) => {
       { $pull: { servicios: servicioEliminado._id } }
     );
   }
+  res.status(201).json({
+    servicioEliminado,
+  });
+};
 
+const deleteServicioSuperAdmin = async (req = request, res = response) => {
+  const { id, hotel } = req.params;
+  const servicioEliminado = await Servicio.findByIdAndDelete(id, { new: true });
+  if (servicioEliminado != null) {
+    const hotelEliminarHabitacion = await Hotel.findByIdAndUpdate(
+      hotel,
+      { $pull: { servicios: servicioEliminado._id } }
+    );
+  }
   res.status(201).json({
     servicioEliminado,
   });
@@ -102,7 +133,9 @@ const deleteServicio = async (req = request, res = response) => {
 module.exports = {
   getServicio,
   getServicioId,
-  postServicio,
+  postServicio: postServicioAdmin,
+  postServicioSuperAdmin,
   putServicio,
-  deleteServicio,
+  deleteServicio: deleteServicioAdmin,
+  deleteServicioSuperAdmin
 };

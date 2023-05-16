@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getReservaciones, getReservacionPorId, postReservacion, putReservacion, deleteReservacion, putAgregarPersona, deleteMiReservacion, putMiReservacion, agregarHabitacion, agregarServicio, agregarEvento, getMiReservacion, postReservacionUsuario } = require('../controllers/reservacion');
+const { getReservaciones, getReservacionPorId, postReservacion, putReservacion, deleteReservacion, putAgregarPersona, deleteMiReservacion, putMiReservacion, agregarHabitacion, agregarServicio, agregarEvento, getMiReservacion, postReservacionUsuario, deleteHabitacion, deleteServicio, deleteEvento } = require('../controllers/reservacion');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { tieneRole } = require('../middlewares/validar-roles');
@@ -87,6 +87,21 @@ router.put('/editar/:id', [
 router.delete('/eliminarMiReservacion', [
     validarJWT,
 ], deleteMiReservacion);
+
+router.delete('/eliminarHabitacion/:id', [
+    validarJWT,
+    validarCampos
+], deleteHabitacion);
+
+router.delete('/eliminarServicio/:id', [
+    validarJWT,
+    validarCampos
+], deleteServicio);
+
+router.delete('/eliminarEvento/:id', [
+    validarJWT,
+    validarCampos
+], deleteEvento);
 
 router.delete('/eliminar/:id', [
     validarJWT,
