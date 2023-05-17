@@ -38,33 +38,42 @@ const getFacturas = async (req = request, res = response) => {
 }
 
 const postFactura = async (req, res) => {
-    const id = req.usuario._id
-    const today = new Date();
-    const options = { 
-      year: 'numeric', 
-      month: 'numeric', 
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: false,
-      timeZone: 'America/New_York'
-    };
-    const date = today.toLocaleDateString('en-US', options);
-    const buscaCuenta = await Reservacion.findOne({usuario: id});
-    const data = {
+    try {
+      const id = req.usuario._id;
+      const today = new Date();
+      const options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        timeZone: 'America/New_York',
+      };
+      const date = today.toLocaleDateString('en-US', options);
+      const buscaCuenta = await Reservacion.findOne({ usuario: id });
+  
+      await Usuario.findByIdAndUpdate(id, {
+        $push: { reservacion: buscaCuenta._id },
+      });
+  
+      for (let i = 0; i < buscaCuenta.habitaciones.length; i++) {
+        await Habitacion.findByIdAndUpdate(buscaCuenta.habitaciones[i]._id, {
+          disponibilidad: true,
+        });
+      }
+  
+      const data = {
         usuario: id,
         fecha: date,
-        reservacion: buscaCuenta._id 
+        reservacion: buscaCuenta._id,
+      };
+  
+      const factura = new Factura(data);
+      await factura.save();
+      res.status(201).json(factura);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: 'Error al procesar la factura' });
     }
-    for(let i= 0; i< buscaCuenta.habitaciones.length; i++){
-        const cambioDisponibilidad = await Habitacion.findByIdAndUpdate(buscaCuenta.habitaciones[i]._id, {disponibilidad: true})
-    }
-    const factura = await Factura(data);
-        await factura.save();
-        res.status(201).json(factura)
-}
-
+  };
 
 module.exports = {
     getFacturas,

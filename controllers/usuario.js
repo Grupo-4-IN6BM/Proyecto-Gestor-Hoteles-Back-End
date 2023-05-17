@@ -6,9 +6,10 @@ const jwt = require('jsonwebtoken');
 const Role = require('../models/role');
 
 const getUsuarios = async (req = request, res = response) => {
-    const listaUsuarios = await Usuario.find({ estado: true })
-    res.status(201).json(listaUsuarios);
-}
+    const id = req.usuario.id;
+    const listaUsuarios = await Usuario.find({ _id: { $ne: id }, estado: true });
+    res.status(200).json(listaUsuarios);
+  };
 
 const getUsuarioPorToken = async (req = request, res = response) => {
     const { token } = req.params;
@@ -20,10 +21,17 @@ const getUsuarioPorToken = async (req = request, res = response) => {
 
 const postUsuarioRegistro = async (req = request, res = response) => {
     let rol = "ROL_CLIENTE"
-    const { nombre, edad, correo, password, identificacion, ...resto } = req.body;
-    const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, rol, ...resto });
+    const { nombre, edad, correo, password, identificacion,img} = req.body;
+    console.log(nombre)
+    const usuarioGuardadoDB = new Usuario({ nombre: nombre.nombre,
+         edad: nombre.edad,
+         correo: nombre.correo, 
+         password: nombre.password, 
+         identificacion: nombre.identificacion, 
+         rol: rol,
+         img: nombre.img});
     const salt = bcrypt.genSaltSync();
-    usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
+    usuarioGuardadoDB.password = bcrypt.hashSync(nombre.password, salt);
     const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
     await reservacionAuto.save();
     await usuarioGuardadoDB.save();
@@ -33,8 +41,10 @@ const postUsuarioRegistro = async (req = request, res = response) => {
 }
 
 const postUsuarioSuperAdmin = async (req = request, res = response) => {
-    const { nombre, edad, correo, password, identificacion, rol, ...resto } = req.body;
-    const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, rol, ...resto });
+    console.log("HOLA")
+    const { nombre, edad, correo, password, identificacion, img, rol } = req.body;
+
+    const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, img, rol });
     const salt = bcrypt.genSaltSync();
     usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
     const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
@@ -60,13 +70,14 @@ const putMiUsuario = async (req = request, res = response) => {
 }
 
 const putUsuarioSuperAdmin = async (req = request, res = response) => {
-    const id = req.usuario.id;
+    console.log("entre");
     const { _id, estado, ...resto } = req.body;
+    console.log(resto);
     if (resto.password) {
         const salt = bcrypt.genSaltSync();
         resto.password = bcrypt.hashSync(resto.password, salt);
     }
-    const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto, { new: true });
+    const usuarioEditado = await Usuario.findByIdAndUpdate(resto.id, resto, { new: true });
     res.json({
         usuarioEditado
     });
@@ -116,5 +127,6 @@ module.exports = {
     deleteMiUsuario,
     roles,
     getUsuarioPorToken,
-    postUsuarioSuperAdmin
+    postUsuarioSuperAdmin,
+    putUsuarioSuperAdmin
 }
