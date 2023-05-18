@@ -16,7 +16,7 @@ const getHabitacionesPorIdHotel = async (req, res) => {
       if (!hotel) {
         return res.status(404).json({ error: 'Hotel no encontrado' });
       }
-      const habitaciones = await Habitacion.find({ hotel: id });
+      const habitaciones = await Habitacion.find({ hotel: id, disponibilidad:true });
       res.status(201).json(habitaciones);
     } catch (error) {
       console.error('Error al obtener las habitaciones del hotel:', error);
@@ -28,7 +28,6 @@ const getHabitacionesPorId = async (req = request, res = response) => {
     const {id} = req.params;
     const habitacionId = await Habitacion.findById(id).populate('hotel', 'nombre')
     res.status(201).json(habitacionId);
-
 }
 
 const postHabitacionAdmin = async (req = request, res = response) => {

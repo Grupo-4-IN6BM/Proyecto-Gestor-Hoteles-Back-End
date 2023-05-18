@@ -8,18 +8,11 @@ const Hotel = require('../models/hotel');
 
 
 const getReservaciones = async (req = request, res = response) => {
-
-    const listaReservaciones = await Promise.all([
-        Reservacion.countDocuments(),
-        Reservacion.find().populate('usuario', 'nombre')
-            .populate('habitaciones', 'numero costo')
-            .populate('servicios', 'nombre precio descripcion')
-            .populate('eventos', 'nombre precio')
-
-    ]);
-
+    const listaReservaciones = await Reservacion.find().populate('usuario', 'img nombre')
+    .populate('habitaciones', 'img tipo numero costo descripcion')
+    .populate('servicios', 'img nombre precio descripcion')
+    .populate('eventos', 'img nombre precio descripcion');
     res.status(201).json(listaReservaciones);
-
 }
 
 const getMiReservacion = async (req = request, res = response) => {
@@ -64,8 +57,12 @@ const agregarHabitacion = async (req, res) => {
     const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { habitaciones: [id] } })
     const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(id, { disponibilidad: false })
     const buscaHotel = await Hotel.findOne({ habitaciones: id })
-
+    console.log("HATEL", buscaHotel)
     const aumentaReservacion = await Hotel.findByIdAndUpdate(buscaHotel._id, { reservaciones: buscaHotel.reservaciones + 1 })
+    const clienteAdd = await Hotel.findByIdAndUpdate(buscaHotel._id, { $push: { clientes: idUsuario } });
+    console.log("CLIENTE", clienteAdd);
+    clienteAdd.save();
+    
     res.status(201).json(agregaHabitacion)
 }
 
@@ -658,29 +655,43 @@ const putMiReservacion = async (req = request, res = response) => {
 
 const deleteReservacion = async (req = request, res = response) => {
     const { id } = req.params;
-    const reservacionCancelada = await Reservacion.findByIdAndDelete(id, { new: true });
-    res.status(201).json({
-        msg: 'Eliminar reservacion',
-        reservacionCancelada
-    })
+    const reservacionCancelada = await Reservacion.findOne({ usuario: id });
+    if (reservacionCancelada != null) {
+        const habitacionesIds = reservacionCancelada.habitaciones.map(habitacion => habitacion._id);
+    
+        await Habitacion.updateMany({ _id: { $in: habitacionesIds } }, { disponibilidad: true });
+    
+        const eliminarReservacion = await Reservacion.findByIdAndDelete(reservacionCancelada._id);
+    
+        res.status(201).json({
+          msg: 'Reservación eliminada',
+          eliminarReservacion
+        });
+      } else {
+        res.status(400).json({ msg: 'La reservación no existe' });
+      }
 }
 
 
 const deleteMiReservacion = async (req = request, res = response) => {
     const id = req.usuario.id;
     const reservacionCancelada = await Reservacion.findOne({ usuario: id });
+  
     if (reservacionCancelada != null) {
-        const eliminarReservacion = await Reservacion.findByIdAndDelete(reservacionCancelada._id)
-        res.status(201).json({
-            msg: 'Eliminar reservacion',
-            eliminarReservacion
-        })
+      const habitacionesIds = reservacionCancelada.habitaciones.map(habitacion => habitacion._id);
+  
+      await Habitacion.updateMany({ _id: { $in: habitacionesIds } }, { disponibilidad: true });
+  
+      const eliminarReservacion = await Reservacion.findByIdAndDelete(reservacionCancelada._id);
+  
+      res.status(201).json({
+        msg: 'Reservación eliminada',
+        eliminarReservacion
+      });
     } else {
-        res.status(400).json({ msg: 'La reservacion no existe' })
+      res.status(400).json({ msg: 'La reservación no existe' });
     }
-
-}
-
+  };
 module.exports = {
     getReservaciones,
     getReservacionPorId,

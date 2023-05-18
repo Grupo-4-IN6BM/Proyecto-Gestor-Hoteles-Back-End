@@ -8,11 +8,7 @@ const { existeReservacionPorId, esFecha } = require('../helpers/db-validators');
 
 const router = Router();
 
-router.get('/', [
-    validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
-    validarCampos
-], getReservaciones);
+router.get('/', getReservaciones);
 
 router.get('/miReservacion', [
     validarJWT,

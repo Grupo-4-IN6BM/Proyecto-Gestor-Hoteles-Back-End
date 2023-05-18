@@ -51,6 +51,31 @@ const buscarEventos = async( termino = '', res = response) => {
     })
 }
 
+const buscarUsuariosEnHotel = async (req = request, res = response) => {
+    const { termino, id } = req.params;
+    const esMongoID = ObjectId.isValid(termino);
+  
+    if (esMongoID) {
+      const usuario = await Usuario.findById(termino);
+      return res.json({
+        results: usuario && usuario.existeEnHotel ? [usuario] : [],
+      });
+    }
+  
+    const regex = new RegExp(termino, 'i');
+    const usuarios = await Usuario.find({
+      $or: [{ nombre: regex }, { correo: regex }],
+      $and: [{ estado: true }],
+    });
+  
+    const busquedaHotel = await Hotel.findOne({ _id: id, clientes: { $in: usuarios.map(u => u._id) } });
+  
+    const usuariosEnHotel = usuarios.filter(usuario =>
+      busquedaHotel && busquedaHotel.clientes.includes(usuario._id)
+    );
+  
+    res.json({ results: usuariosEnHotel });
+  };
 const buscarHabitaciones = async( termino = '', res = response) => {
     const esMongoID = ObjectId.isValid( termino );
     if ( esMongoID ) {
@@ -139,5 +164,6 @@ const buscar = (req = request, res = response) => {
 
 
 module.exports = {
-    buscar
+    buscar,
+    buscarUsuariosEnHotel
 }

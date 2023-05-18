@@ -8,7 +8,7 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { tieneRole } = require('../middlewares/validar-roles');
-const { getFacturas, getMiFactura, postFactura } = require('../controllers/factura');
+const { getFacturas, getMiFactura, postFactura, postFacturaId } = require('../controllers/factura');
 
 const router = Router();
 
@@ -30,6 +30,10 @@ router.post('/agregar',[
     validarCampos
 ], postFactura)
 
+router.post('/agregar/:id',[
+    check('id', 'No es un ID válido').isMongoId(),
+    validarCampos
+], postFacturaId)
 
 
 module.exports = router;

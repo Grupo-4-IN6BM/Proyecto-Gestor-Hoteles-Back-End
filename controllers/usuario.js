@@ -58,12 +58,13 @@ const postUsuarioSuperAdmin = async (req = request, res = response) => {
 const putMiUsuario = async (req = request, res = response) => {
     console.log("hola")
     const id = req.usuario.id;
-    const {nombre, correo, identificacion, edad} = req.body;
+    const {nombre, correo, identificacion, edad, img} = req.body;
     const usuarioEditado = await Usuario.findByIdAndUpdate(id, {
         nombre: nombre,
         correo: correo,
         identificacion: identificacion,
-        edad: edad  
+        edad: edad,
+        img: img  
     }, { new: true });
     res.status(201).json(usuarioEditado);
 

@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
-const { getHotelesPorId, getHotelesPorNombre, postHoteles, putHotel, eliminarHotel, deshabilitarHotel, getHoteles, postHotelesSuperAdmin } = require('../controllers/hotel');
+const { getHotelesPorId, getHotelesPorNombre, postHoteles, putHotel, eliminarHotel, deshabilitarHotel, getHoteles, postHotelesSuperAdmin, getHotelesPorAdmin } = require('../controllers/hotel');
 const { existeHotelPorNombre, existeHotelPorId } = require('../helpers/db-validators');
 
 const router = Router();
@@ -18,6 +18,9 @@ router.get('/buscar/:id',[
 
 router.get('/buscarNombre/:nombre'
 , getHotelesPorNombre);
+
+router.get('/porAdmin/:id'
+, getHotelesPorAdmin);
 
 router.post('/agregar/',[
     validarJWT,

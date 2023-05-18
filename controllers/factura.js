@@ -54,12 +54,6 @@ const postFactura = async (req, res) => {
         $push: { reservacion: buscaCuenta._id },
       });
   
-      for (let i = 0; i < buscaCuenta.habitaciones.length; i++) {
-        await Habitacion.findByIdAndUpdate(buscaCuenta.habitaciones[i]._id, {
-          disponibilidad: true,
-        });
-      }
-  
       const data = {
         usuario: id,
         fecha: date,
@@ -75,8 +69,42 @@ const postFactura = async (req, res) => {
     }
   };
 
+  const postFacturaId = async (req, res) => {
+    try {
+      const {id} = req.params;
+      console.log(id);
+      const today = new Date();
+      const options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        timeZone: 'America/New_York',
+      };
+      const date = today.toLocaleDateString('en-US', options);
+      const buscaCuenta = await Reservacion.findById(id);
+      console.log(buscaCuenta);
+      await Usuario.findByIdAndUpdate(buscaCuenta.usuario, {
+        $push: { reservacion: id },
+      });
+  
+      const data = {
+        usuario: buscaCuenta.usuario,
+        fecha: date,
+        reservacion: id,
+      };
+  
+      const factura = new Factura(data);
+      await factura.save();
+      res.status(201).json(factura);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: 'Error al procesar la factura' });
+    }
+  };
+
 module.exports = {
     getFacturas,
     getMiFactura,
-    postFactura
+    postFactura,
+    postFacturaId
 }
