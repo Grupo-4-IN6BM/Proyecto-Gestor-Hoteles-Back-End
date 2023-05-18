@@ -5,7 +5,6 @@ const Usuario = require('../models/usuario');
 
 const jwt = require('jsonwebtoken');
 const getHoteles = async (req = request, res = response) => {
-    ;
     const listaHoteles = await Hotel.find({ estado: true }).populate("habitaciones", "numero costo descripcion")
         .populate("eventos", "nombre precio")
         .populate("servicios", "nombre precio descripcion")

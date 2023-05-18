@@ -52,16 +52,22 @@ const postHabitacionAdmin = async (req = request, res = response) => {
 
 }
 const postHabitacionSuperAdmin = async (req = request, res = response) => {
-    const id = req.usuario.id
-    const { numero, costo, descripcion, capacidad, hotel,...resto} = req.body;
-    const buscar = await Habitacion.findOne({ numero: numero })
+    const habitacionAgregada = req.body;
+    console.log(habitacionAgregada);
+    const buscar = await Habitacion.findOne({ numero: habitacionAgregada.numero })
     if (buscar) {
         return res.status(400).json({
-            msg: `La habitacion con el numero ${buscar.numero} ya existe en la DB`
+            msg: `La habitacion con el numero ${buscar.habitacionAgregada.numero} ya existe en la DB`
         })
     }else{
-    const habitacionGuardadaDB = new Habitacion({numero, costo, hotel, descripcion, capacidad, ...resto});
-    const hotelGuardaHabitacion = await Hotel.findByIdAndUpdate(hotel, {$push:{habitaciones: [habitacionGuardadaDB._id]}})
+    const habitacionGuardadaDB = new Habitacion({
+        numero: habitacionAgregada.numero, 
+        costo: habitacionAgregada.costo, 
+        hotel: habitacionAgregada.hotel, 
+        descripcion: habitacionAgregada.descripcion, 
+        capacidad: habitacionAgregada.cantidad_personas,
+        tipo: habitacionAgregada.tipo_habitacion});
+   
     await habitacionGuardadaDB.save();
     
     res.json({
@@ -73,23 +79,27 @@ const postHabitacionSuperAdmin = async (req = request, res = response) => {
 
 const putHabitacion = async (req = request, res = response) => {
     const { id } = req.params;
-    const { _id, ...resto } = req.body;
-    const buscar = await Habitacion.findOne({ numero: numero })
-
+    const habitacionEditada = req.body
+    console.log(habitacionEditada);
+    const buscar = await Habitacion.findOne({ numero: habitacionEditada.numero })
     if (buscar) {
         return res.status(400).json({
             msg: `La habitacion con el numero ${buscar.numero} ya existe en la DB`
         })
     }else{
-        const habitacionEditada = await Habitacion.findByIdAndUpdate(id, resto, {new: true});
-
+        const habitacionEditada = await Habitacion.findByIdAndUpdate(id, {
+            numero: habitacionEditada.numero, 
+            descripcion: habitacionEditada.descripcion,
+            costo: habitacionEditada.costo,
+            img: habitacionEditada.img,
+        }, {new: true});
+        console.log(habitacionEditada);
         res.status(201).json({
             habitacionEditada
         });
     }
-    
-
 }
+
 
 const deleteHabitacionAdmin = async(req = request, res = response) => {
     const { id } = req.params;

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUsuarios, postUsuario, putUsuario, deleteUsuario, deleteMiUsuario, getUsuarioPorToken, postUsuarioSuperAdmin, putUsuarioSuperAdmin } = require('../controllers/usuario');
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario, deleteMiUsuario, getUsuarioPorToken, postUsuarioSuperAdmin, putUsuarioSuperAdmin, deleteUsuarios, postUserAdmin } = require('../controllers/usuario');
 const { emailExiste, esRoleValido, existeUsuarioPorId, identificacionExiste } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
@@ -29,9 +29,13 @@ router.post('/agregarAdmin', [
 
 
 router.post('/agregarUsuario', [
-    
     validarCampos,
 ] ,postUsuario);
+
+
+router.post('/addAdmin', [
+    validarCampos,
+] ,postUserAdmin);
 
 router.post('/agregarSuperAdmin', [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
@@ -76,6 +80,8 @@ router.delete('/eliminar/:id', [
     check('id').custom( existeUsuarioPorId ),
     validarCampos
 ] ,deleteUsuario);
+
+router.delete('/eliminarById/:id' ,deleteUsuarios);
 
 router.delete('/eliminarMiCuenta', [
     validarJWT,

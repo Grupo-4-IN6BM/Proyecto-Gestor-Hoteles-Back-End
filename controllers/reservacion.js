@@ -15,6 +15,32 @@ const getReservaciones = async (req = request, res = response) => {
     res.status(201).json(listaReservaciones);
 }
 
+const getReservaPorHotel = async (req = request, res = response) => {
+    const { id } = req.params;
+    try {
+      const buscaHotel = await Hotel.findById(id);
+      if (!buscaHotel) {
+        return res.status(404).json({ mensaje: 'Hotel no encontrado' });
+      }
+      // Obtener los IDs de los usuarios del arreglo de clientes del hotel
+      const usuariosIds = buscaHotel.clientes.map(cliente => cliente._id);
+      // Buscar las reservaciones correspondientes a los usuarios encontrados
+      const reservaciones = await Reservacion.find({ usuario: { $in: usuariosIds } });
+      // Obtener la información completa de los usuarios de las reservaciones
+      const reservacionesConUsuarios = await Promise.all(reservaciones.map(async reservacion => {
+        const usuario = await Usuario.findById(reservacion.usuario);
+        return {
+          ...reservacion.toObject(),
+          usuario: usuario.toObject()
+        };
+      }));
+      res.status(200).json(reservacionesConUsuarios);
+    } catch (error) {
+      res.status(500).json({ mensaje: 'Error al obtener las reservaciones' });
+    }
+  };
+
+
 const getMiReservacion = async (req = request, res = response) => {
     const id = req.usuario.id;
     const reservacion = await Reservacion.findOne({ usuario: id }).populate('usuario', 'nombre')
@@ -709,4 +735,5 @@ module.exports = {
     getMiReservacion,
     deleteEvento, 
     deleteServicio,
+    getReservaPorHotel
 }

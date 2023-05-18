@@ -40,6 +40,27 @@ const postUsuarioRegistro = async (req = request, res = response) => {
     });
 }
 
+const postUserAdmin = async (req = request, res = response) => {
+    let rol = "ROL_ADMINISTRATIVO"
+    const { nombre, edad, correo, password, identificacion,img} = req.body;
+    console.log(nombre)
+    const usuarioGuardadoDB = new Usuario({ nombre: nombre,
+         edad: edad,
+         correo: correo, 
+         password: password, 
+         identificacion: identificacion, 
+         rol: rol,
+         img: img});
+    const salt = bcrypt.genSaltSync();
+    usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
+    const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
+    await reservacionAuto.save();
+    await usuarioGuardadoDB.save();
+    res.status(201).json({
+        usuarioGuardadoDB
+    });
+}
+
 const postUsuarioSuperAdmin = async (req = request, res = response) => {
     console.log("HOLA")
     const { nombre, edad, correo, password, identificacion, img, rol } = req.body;
@@ -97,6 +118,15 @@ const deleteUsuariosSuperAdmin = async (req = request, res = response) => {
     res.status(201).json(eliminado);
 }
 
+const deleteUsuarios = async (req = request, res = response) => {
+    const { id } = req.params;
+    const { uid } = jwt.verify(id, process.env.SECRET_KEY_FOR_TOKEN);
+    console.log(uid);
+    const usuarioEliminado = await Usuario.findById(uid);
+    const eliminado = await Usuario.findByIdAndDelete(uid, { new: true });
+    res.status(201).json(eliminado);
+}
+
 const roles = async (req, res) => {
     try {
         let role = new Role();
@@ -127,7 +157,9 @@ module.exports = {
     deleteUsuario: deleteUsuariosSuperAdmin,
     deleteMiUsuario,
     roles,
+    deleteUsuarios,
     getUsuarioPorToken,
     postUsuarioSuperAdmin,
-    putUsuarioSuperAdmin
+    putUsuarioSuperAdmin,
+    postUserAdmin
 }
