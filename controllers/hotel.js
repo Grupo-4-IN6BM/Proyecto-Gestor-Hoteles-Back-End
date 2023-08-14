@@ -68,15 +68,15 @@ const postHotelesAdmin = async (req = request, res = response) => {
     const administrador = req.usuario.id
     const { nombre, pais, direccion, longitud, latitud, ...resto } = req.body;
     const buscarAdmin = await Hotel.findOne({ administrador: administrador })
-    if (buscarAdmin) {
-        res.status(400).json({
-            msg: `El administrador ${buscarAdmin.administrador}, ya es administrador de un hotel`
-        })
-    } else {
+    // if (buscarAdmin) {
+    //     res.status(400).json({
+    //         msg: `El administrador ${buscarAdmin.administrador}, ya es administrador de un hotel`
+    //     })
+    // } else {
         const hotelGuardadoDB = new Hotel({ nombre, pais, direccion, administrador, longitud, latitud, ...resto });
         await hotelGuardadoDB.save();
         res.status(201).json(hotelGuardadoDB)
-    }
+    // }
 }
 
 const postHotelesSuperAdmin = async (req = request, res = response) => {

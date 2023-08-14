@@ -680,8 +680,11 @@ const putMiReservacion = async (req = request, res = response) => {
 }
 
 const deleteReservacion = async (req = request, res = response) => {
+    console.log("Entre");
     const { id } = req.params;
+    console.log(id);
     const reservacionCancelada = await Reservacion.findOne({ usuario: id });
+    console.log(reservacionCancelada);
     if (reservacionCancelada != null) {
         const habitacionesIds = reservacionCancelada.habitaciones.map(habitacion => habitacion._id);
     

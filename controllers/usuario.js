@@ -30,6 +30,7 @@ const postUsuarioRegistro = async (req = request, res = response) => {
          identificacion: nombre.identificacion, 
          rol: rol,
          img: nombre.img});
+         console.log(usuarioGuardadoDB);
     const salt = bcrypt.genSaltSync();
     usuarioGuardadoDB.password = bcrypt.hashSync(nombre.password, salt);
     const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })

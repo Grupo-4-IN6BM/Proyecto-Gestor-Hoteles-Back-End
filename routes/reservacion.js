@@ -101,13 +101,7 @@ router.delete('/eliminarEvento/:id', [
     validarCampos
 ], deleteEvento);
 
-router.delete('/eliminar/:id', [
-    validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
-    check('id', 'No es un id de Mongo Válido').isMongoId(),
-    check('id').custom( existeReservacionPorId ),
-    validarCampos
-], deleteReservacion);
+router.delete('/eliminar/:id', deleteReservacion);
 
 
 module.exports = router;

@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ],
+    "env": {
+      "PORT": "8080",
+      "MONGODB_CNN": "mongodb://admin:admin@ac-0c3tgwo-shard-00-00.vv2f9sr.mongodb.net:27017,ac-0c3tgwo-shard-00-01.vv2f9sr.mongodb.net:27017,ac-0c3tgwo-shard-00-02.vv2f9sr.mongodb.net:27017/gestor-hoteles?ssl=true&replicaSet=atlas-zqetub-shard-0&authSource=admin&retryWrites=true&w=majority",
+      "SECRET_KEY_FOR_TOKEN":"SECRET_KEY"
+    }
+  }
