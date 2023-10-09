@@ -64,6 +64,24 @@ const getHotelesPorNombre = async (req = request, res = response) => {
 
 }
 
+const getHotelesPorPais = async (req = request, res = response) => {
+    const { nombre } = req.params;
+    const query = { pais: nombre, estado: true };
+    const listaHoteles = await Promise.all([
+        Hotel.countDocuments(query),
+        Hotel.find(query).populate("habitaciones", "numero costo descripcion disponibilidad")
+            .populate("eventos", "nombre precio")
+            .populate("servicios", "nombre precio descripcion")
+            .populate("administrador", "nombre identificacion")
+            .populate("trabajadores", "nombre identificacion")
+    ]);
+
+    res.json({
+        listaHoteles
+    });
+
+}
+
 const postHotelesAdmin = async (req = request, res = response) => {
     const administrador = req.usuario.id
     const { nombre, pais, direccion, longitud, latitud, ...resto } = req.body;
@@ -130,5 +148,6 @@ module.exports = {
     deshabilitarHotel,
     eliminarHotel,
     agregarTrabajadores,
-    getHotelesPorAdmin
+    getHotelesPorAdmin,
+    getHotelesPorPais,
 }
