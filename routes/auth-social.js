@@ -17,8 +17,8 @@ router.get('/google/callback',
   passport.authenticate('google', { session: false }), 
   (req, res) => {
     if(req.user) {
-      // Usuario autenticado
-      res.json(req.user);
+      req.session.user = user; 
+        res.redirect('/principalCliente');
     } else {
       // Error de autenticación
       res.status(401).json({error: 'No se pudo autenticar al usuario'});

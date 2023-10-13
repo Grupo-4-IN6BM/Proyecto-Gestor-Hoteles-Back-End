@@ -12,8 +12,11 @@ class Server {
         this.app = express();
         this.app.use(expressSession({
             secret: 'tu_secreto', // Cambia 'tu_secreto' por una cadena segura para tus sesiones
-            resave: false,
-            saveUninitialized: true
+            resave: false, 
+            saveUninitialized: false,
+            cookie: {
+              expires: 0
+            }
           }));
         this.app.use(passport.initialize());
         this.app.use(passport.session());
