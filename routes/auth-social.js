@@ -18,7 +18,7 @@ router.get('/google/callback',
   (req, res) => {
     if(req.user) {
       req.session.user = user; 
-        res.redirect('/hoteles');
+        res.render('/hoteles');
     } else {
       // Error de autenticación
       res.status(401).json({error: 'No se pudo autenticar al usuario'});
