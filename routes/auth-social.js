@@ -19,7 +19,7 @@ router.get('/google/callback',
   async(req, res) => {
     if (req.user) {
       req.session.user = req.user; 
-      const token = await generarJWT( user.id, user.rol );
+      const token = await generarJWT( req.user.id, req.user.rol );
       res.json({ token });
         res.redirect('https://gestor-hoteles-in6bm.web.app/hoteles');
     } else {
