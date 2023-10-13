@@ -2,6 +2,7 @@ const { Router } = require('express');
 const passport = require('passport');
 const express = require('express');
 const { google } = require('../controllers/authGoogle');
+const { generarJWT } = require('../helpers/generar-jwt');
 const app = express();
 const router = Router();
 // app.use(expressSession({
@@ -15,9 +16,11 @@ const router = Router();
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', 
   passport.authenticate('google', { session: false }), 
-  (req, res) => {
-    if(req.user) {
+  async(req, res) => {
+    if (req.user) {
       req.session.user = req.user; 
+      const token = await generarJWT( user.id, user.rol );
+      localStorage.setItem('token', token);
         res.redirect('http://localhost:5173/hoteles');
     } else {
       // Error de autenticación
