@@ -17,8 +17,8 @@ router.get('/google/callback',
   passport.authenticate('google', { session: false }), 
   (req, res) => {
     if(req.user) {
-      req.session.user = user; 
-        res.render('/hoteles');
+      req.session.user = req.user; 
+        res.redirect('http://localhost:5173/hoteles');
     } else {
       // Error de autenticación
       res.status(401).json({error: 'No se pudo autenticar al usuario'});
