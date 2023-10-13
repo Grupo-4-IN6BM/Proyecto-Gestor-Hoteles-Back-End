@@ -9,7 +9,7 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const google = passport.use(new GoogleStrategy({
     clientID: '1053486057798-g8616fs764lp64ov08qu49esmnnhplsm.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: 'http://localhost:8080/api/social/google/callback'
+    callbackURL: 'https://proyecto-gestor-hoteles-back-end-gilt.vercel.app/api/social/google/callback'
 }, async (accessToken, refreshToken, profile, done) => {
     console.log("hola");
     try {
