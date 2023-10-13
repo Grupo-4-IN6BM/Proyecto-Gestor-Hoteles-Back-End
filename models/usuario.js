@@ -7,7 +7,6 @@ const UsuarioSchema = Schema({
     },
     edad: {
         type: Number,
-        required: [true, 'La edad es obligatoria']
     },
     correo: {
         type: String,
@@ -16,11 +15,10 @@ const UsuarioSchema = Schema({
     },
     password: {
         type: String,
-        required: [true, 'El password es obligatorio' ]
+       //no required: por el auth social con google y/o facebook
     },
     identificacion: {
         type: String,
-        required: [true, 'La identificacion es obligatoria' ]
     },
     rol: {
         type: String,

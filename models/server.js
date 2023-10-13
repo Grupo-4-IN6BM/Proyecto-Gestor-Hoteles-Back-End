@@ -2,12 +2,21 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConection } = require('../database/config');
-const {roles} = require('../controllers/usuario')
+const {roles} = require('../controllers/usuario');
+const passport = require('passport');
+const expressSession = require('express-session');
 class Server {
 
     constructor() {
         //Configuración inicial
         this.app = express();
+        this.app.use(expressSession({
+            secret: 'tu_secreto', // Cambia 'tu_secreto' por una cadena segura para tus sesiones
+            resave: false,
+            saveUninitialized: true
+          }));
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
         this.app.get('/', (req, res) => {
             res.send("PAGINA DE INICIO")
         })
@@ -15,6 +24,7 @@ class Server {
 
         this.paths = {
             auth:           '/api/auth',
+            authSocial:     '/api/social',
             buscar:         '/api/buscar',
             eventos:        '/api/eventos',
             facturas:       '/api/facturas',
@@ -61,6 +71,7 @@ class Server {
 
     routes() {
         this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.authSocial, require('../routes/auth-social'));
         this.app.use(this.paths.buscar, require('../routes/buscar'));
         this.app.use(this.paths.eventos , require('../routes/evento'));
         this.app.use(this.paths.facturas, require('../routes/factura'));

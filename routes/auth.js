@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-
 //Controllers
 const { login } = require('../controllers/auth');
 // Middlewares
@@ -16,5 +15,12 @@ router.post('/login', [
     validarCampos,
 ] ,login);
 
+router.get('/success', (req, res) => {
+    res.send('Autenticación exitosa');
+});
 
+// Ruta para manejar la respuesta fallida de la autenticación
+router.get('/failure', (req, res) => {
+    res.send('Autenticación fallida');
+});
 module.exports = router;

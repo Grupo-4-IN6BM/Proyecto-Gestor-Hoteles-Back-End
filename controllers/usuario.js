@@ -41,6 +41,7 @@ const postUsuarioRegistro = async (req = request, res = response) => {
     });
 }
 
+
 const postUserAdmin = async (req = request, res = response) => {
     let rol = "ROL_ADMINISTRATIVO"
     const { nombre, edad, correo, password, identificacion,img} = req.body;
