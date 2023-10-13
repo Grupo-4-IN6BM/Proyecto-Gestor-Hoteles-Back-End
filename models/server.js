@@ -10,6 +10,7 @@ class Server {
     constructor() {
         //Configuración inicial
         this.app = express();
+        this.app.use(cors());
         this.app.use(expressSession({
             secret: 'tu_secreto', // Cambia 'tu_secreto' por una cadena segura para tus sesiones
             resave: false, 
