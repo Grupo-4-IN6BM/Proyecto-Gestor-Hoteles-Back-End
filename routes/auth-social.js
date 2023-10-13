@@ -20,8 +20,9 @@ router.get('/google/callback',
     if (req.user) {
       req.session.user = req.user; 
       const token = await generarJWT( user.id, user.rol );
-      localStorage.setItem('token', token);
+
         res.redirect('http://localhost:5173/hoteles');
+        localStorage.setItem('token', token);
     } else {
       // Error de autenticación
       res.status(401).json({error: 'No se pudo autenticar al usuario'});
