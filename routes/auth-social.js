@@ -5,23 +5,16 @@ const { google } = require('../controllers/authGoogle');
 const { generarJWT } = require('../helpers/generar-jwt');
 const app = express();
 const router = Router();
-// app.use(expressSession({
-//     secret: 'tu_secreto', // Cambia 'tu_secreto' por una cadena segura para tus sesiones
-//     resave: false,
-//     saveUninitialized: true
-//   }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// Rutas de autenticación con Google
+
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', 
   passport.authenticate('google', { session: false }), 
   async(req, res) => {
-    if (req.user) {
+      if (req.isAuthenticated()) {
       req.session.user = req.user; 
       const token = await generarJWT( req.user.id, req.user.rol );
-      res.json({ token });
-        res.redirect('https://gestor-hoteles-in6bm.web.app/hoteles');
+      res.redirect('http://localhost:5173/hoteles?token=' + token);
+      
     } else {
       // Error de autenticación
       res.status(401).json({error: 'No se pudo autenticar al usuario'});

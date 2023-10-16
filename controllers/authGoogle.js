@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const Usuario = require('../models/usuario');
+const reservacion = require('../models/reservacion');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
@@ -9,10 +10,10 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const google = passport.use(new GoogleStrategy({
     clientID: '1053486057798-g8616fs764lp64ov08qu49esmnnhplsm.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: 'https://proyecto-gestor-hoteles-back-end-gilt.vercel.app/api/social/google/callback'
+    callbackURL: 'http://localhost:8080/api/social/google/callback'
 }, async (accessToken, refreshToken, profile, done) => {
-    console.log("hola");
     try {
+      console.log(profile);
         // Verifica si el usuario ya existe en la base de datos
         const user = await Usuario.findOne({ correo: profile.emails[0].value });
     
@@ -25,9 +26,12 @@ const google = passport.use(new GoogleStrategy({
             let newUser = new Usuario({
                 nombre: profile.displayName,
                 correo: profile.emails[0].value,
+                identificacion : `${profile.id}-${accessToken}`,
                 rol: "ROL_CLIENTE",
                 img: profile.photos[0].value
             });
+            const reservacionAuto = new reservacion({ usuario: newUser._id })
+            await reservacionAuto.save();
             await newUser.save();
             done(null, newUser);
         }

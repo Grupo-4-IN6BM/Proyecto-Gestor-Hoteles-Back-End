@@ -15,6 +15,7 @@ const UsuarioSchema = Schema({
     },
     password: {
         type: String,
+        default: ""
        //no required: por el auth social con google y/o facebook
     },
     identificacion: {

@@ -4,20 +4,24 @@ const cors = require('cors');
 const { dbConection } = require('../database/config');
 const {roles} = require('../controllers/usuario');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 class Server {
 
     constructor() {
         //Configuración inicial
         this.app = express();
-        this.app.use(cors());
+        this.app.use(cookieParser());
+        this.app.use(cors({
+            credentials: true
+        }));
         this.app.use(expressSession({
             secret: 'tu_secreto', // Cambia 'tu_secreto' por una cadena segura para tus sesiones
             resave: false, 
             saveUninitialized: false,
-            cookie: {
-              expires: 0
-            }
+            cookie : {
+                maxAge: 3600000 // 1 hour
+        }   
           }));
         this.app.use(passport.initialize());
         this.app.use(passport.session());
