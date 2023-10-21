@@ -12,7 +12,7 @@ const { blacklistToken } = require('../blacklistToken');
 const router = Router();
 const CLIENT_ID= '1053486057798-g8616fs764lp64ov08qu49esmnnhplsm.apps.googleusercontent.com';
 const CLIENT_SECRET= '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';
-const CALLBACK_URL= 'http://localhost:8080/api/social/google/callback';
+const CALLBACK_URL= 'https://proyecto-gestor-hoteles-back-end-gilt.vercel.app/api/social/google/callback';
 router.get('/buscar', getHoteles);
 
 router.get('/buscar/:id', [
