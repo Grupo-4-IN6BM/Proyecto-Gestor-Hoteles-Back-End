@@ -1,26 +1,13 @@
 const { Router } = require('express');
 const passport = require('passport');
 const express = require('express');
-const { google } = require('../controllers/authGoogle');
+const { google, postUsuarioGoogle } = require('../controllers/authGoogle');
 const { generarJWT } = require('../helpers/generar-jwt');
 const app = express();
 const router = Router();
 
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/google/callback', 
-  passport.authenticate('google', { session: false }), 
-  async(req, res) => {
-      if (req.isAuthenticated()) {
-      req.session.user = req.user; 
-      const token = await generarJWT( req.user.id, req.user.rol );
-      res.redirect('http://localhost:5173/hoteles?token=' + token);
-      
-    } else {
-      // Error de autenticación
-      res.status(401).json({error: 'No se pudo autenticar al usuario'});
-    }
-});
-// Rutas de autenticación con Facebook
+router.post('/googleLogin', postUsuarioGoogle);
+
 router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 router.get('/facebook/callback', passport.authenticate('facebook', { successRedirect: '/auth/success', failureRedirect: '/auth/failure' }));
 

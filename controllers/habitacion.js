@@ -5,7 +5,6 @@ const Hotel = require('../models/hotel');
 
 const getHabitaciones = async (req = request, res = response) => {
     const habitaciones = await Habitacion.find({disponibilidad: true}).populate('hotel', 'nombre')
-    console.log(habitaciones)
     res.status(201).json(habitaciones);
 
 }
@@ -53,7 +52,6 @@ const postHabitacionAdmin = async (req = request, res = response) => {
 }
 const postHabitacionSuperAdmin = async (req = request, res = response) => {
     const habitacionAgregada = req.body;
-    console.log(habitacionAgregada);
     const buscar = await Habitacion.findOne({ numero: habitacionAgregada.numero })
     if (buscar) {
         return res.status(400).json({
@@ -80,7 +78,6 @@ const postHabitacionSuperAdmin = async (req = request, res = response) => {
 const putHabitacion = async (req = request, res = response) => {
     const { id } = req.params;
     const habitacionEditada = req.body
-    console.log(habitacionEditada);
     const buscar = await Habitacion.findOne({ numero: habitacionEditada.numero })
     if (buscar) {
         return res.status(400).json({
@@ -93,7 +90,6 @@ const putHabitacion = async (req = request, res = response) => {
             costo: habitacionEditada.costo,
             img: habitacionEditada.img,
         }, {new: true});
-        console.log(habitacionEditada);
         res.status(201).json({
             habitacionEditada
         });

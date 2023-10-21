@@ -6,38 +6,14 @@ const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
 const { getHotelesPorId, getHotelesPorNombre, postHoteles, putHotel, eliminarHotel, deshabilitarHotel, getHoteles, postHotelesSuperAdmin, getHotelesPorAdmin, getHotelesPorPais } = require('../controllers/hotel');
 const { existeHotelPorNombre, existeHotelPorId } = require('../helpers/db-validators');
 const { OAuth2Client } = require('google-auth-library');
-const usuario = require('../models/usuario');
-
+const Usuario = require('../models/usuario');
+const jwt = require('jsonwebtoken');
+const { blacklistToken } = require('../blacklistToken');
 const router = Router();
-
+const CLIENT_ID= '1053486057798-g8616fs764lp64ov08qu49esmnnhplsm.apps.googleusercontent.com';
+const CLIENT_SECRET= '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';
+const CALLBACK_URL= 'http://localhost:8080/api/social/google/callback';
 router.get('/buscar', getHoteles);
-
-router.post('/logout', async (req, res) => {
-    try {
-        const payload = jwt.verify(req.headers.token, process.env.SECRET_KEY_FOR_TOKEN);
-        const uid = payload.uid;
-
-        const usuario = await Usuario.findById(uid);
-
-        const parts = usuario.identificacion.split('-');
-        const profileId = parts[0];
-        const accessToken = parts[1];
-
-        if (usuario) {
-            const client = new OAuth2Client("1053486057798-g8616fs764lp64ov08qu49esmnnhplsm.apps.googleusercontent.com");
-            await client.revokeToken(accessToken, profileId);
-
-            blacklistToken(req.headers.token);
-
-            res.sendStatus(401);
-        } else {
-            res.sendStatus(401);
-        }
-    } catch (error) {
-        console.error('Error al realizar el logout:', error);
-        res.sendStatus(500); // Error interno del servidor
-    }
-});
 
 router.get('/buscar/:id', [
     check('id', 'No es un id de Mongo Válido').isMongoId(),

@@ -72,7 +72,6 @@ const postFactura = async (req, res) => {
   const postFacturaId = async (req, res) => {
     try {
       const {id} = req.params;
-      console.log(id);
       const today = new Date();
       const options = {
         year: 'numeric',
@@ -82,7 +81,6 @@ const postFactura = async (req, res) => {
       };
       const date = today.toLocaleDateString('en-US', options);
       const buscaCuenta = await Reservacion.findById(id);
-      console.log(buscaCuenta);
       await Usuario.findByIdAndUpdate(buscaCuenta.usuario, {
         $push: { reservacion: id },
       });

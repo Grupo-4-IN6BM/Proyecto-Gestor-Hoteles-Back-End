@@ -15,14 +15,12 @@ const getUsuarioPorToken = async (req = request, res = response) => {
     const { token } = req.params;
     const { uid } = jwt.verify(token, process.env.SECRET_KEY_FOR_TOKEN);
     const listaUsuarios = await Usuario.findById(uid);
-    console.log(listaUsuarios)
     res.status(201).json(listaUsuarios);
 }
 
 const postUsuarioRegistro = async (req = request, res = response) => {
     let rol = "ROL_CLIENTE"
     const { nombre, edad, correo, password, identificacion,img} = req.body;
-    console.log(nombre)
     const usuarioGuardadoDB = new Usuario({ nombre: nombre.nombre,
          edad: nombre.edad,
          correo: nombre.correo, 
@@ -30,7 +28,6 @@ const postUsuarioRegistro = async (req = request, res = response) => {
          identificacion: nombre.identificacion, 
          rol: rol,
          img: nombre.img});
-         console.log(usuarioGuardadoDB);
     const salt = bcrypt.genSaltSync();
     usuarioGuardadoDB.password = bcrypt.hashSync(nombre.password, salt);
     const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
@@ -45,7 +42,6 @@ const postUsuarioRegistro = async (req = request, res = response) => {
 const postUserAdmin = async (req = request, res = response) => {
     let rol = "ROL_ADMINISTRATIVO"
     const { nombre, edad, correo, password, identificacion,img} = req.body;
-    console.log(nombre)
     const usuarioGuardadoDB = new Usuario({ nombre: nombre,
          edad: edad,
          correo: correo, 
@@ -64,7 +60,6 @@ const postUserAdmin = async (req = request, res = response) => {
 }
 
 const postUsuarioSuperAdmin = async (req = request, res = response) => {
-    console.log("HOLA")
     const { nombre, edad, correo, password, identificacion, img, rol } = req.body;
 
     const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, img, rol });
@@ -79,7 +74,6 @@ const postUsuarioSuperAdmin = async (req = request, res = response) => {
 }
 
 const putMiUsuario = async (req = request, res = response) => {
-    console.log("hola")
     const id = req.usuario.id;
     const {nombre, correo, identificacion, edad, img} = req.body;
     const usuarioEditado = await Usuario.findByIdAndUpdate(id, {
@@ -94,9 +88,7 @@ const putMiUsuario = async (req = request, res = response) => {
 }
 
 const putUsuarioSuperAdmin = async (req = request, res = response) => {
-    console.log("entre");
     const { _id, estado, ...resto } = req.body;
-    console.log(resto);
     if (resto.password) {
         const salt = bcrypt.genSaltSync();
         resto.password = bcrypt.hashSync(resto.password, salt);
@@ -123,7 +115,6 @@ const deleteUsuariosSuperAdmin = async (req = request, res = response) => {
 const deleteUsuarios = async (req = request, res = response) => {
     const { id } = req.params;
     const { uid } = jwt.verify(id, process.env.SECRET_KEY_FOR_TOKEN);
-    console.log(uid);
     const usuarioEliminado = await Usuario.findById(uid);
     const eliminado = await Usuario.findByIdAndDelete(uid, { new: true });
     res.status(201).json(eliminado);

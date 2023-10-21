@@ -10,7 +10,6 @@ const getHoteles = async (req = request, res = response) => {
         .populate("servicios", "nombre precio descripcion")
         .populate("administrador", "nombre identificacion")
         .populate("trabajadores", "nombre identificacion")
-    console.log(listaHoteles)
     res.json({
         listaHoteles
     });

@@ -9,22 +9,10 @@ const expressSession = require('express-session');
 class Server {
 
     constructor() {
-        //Configuración inicial
         this.app = express();
-        this.app.use(cookieParser());
         this.app.use(cors({
             credentials: true
-        }));
-        this.app.use(expressSession({
-            secret: 'tu_secreto', // Cambia 'tu_secreto' por una cadena segura para tus sesiones
-            resave: false, 
-            saveUninitialized: false,
-            cookie : {
-                maxAge: 3600000 // 1 hour
-        }   
-          }));
-        this.app.use(passport.initialize());
-        this.app.use(passport.session());
+        }))
         this.app.get('/', (req, res) => {
             res.send("PAGINA DE INICIO")
         })

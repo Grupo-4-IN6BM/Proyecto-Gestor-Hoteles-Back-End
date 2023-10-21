@@ -76,36 +76,26 @@ const getReservacionPorId = async (req = request, res = response) => {
 
 const agregarHabitacion = async (req, res) => {
     const idUsuario = req.usuario.id;
-    console.log("ID", idUsuario);
     const { id } = req.params;
     const idReservacion = await Reservacion.findOne({ usuario: idUsuario })
-    console.log("RESERVACION", idReservacion)
     const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { habitaciones: [id] } })
     const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(id, { disponibilidad: false })
     const buscaHotel = await Hotel.findOne({ habitaciones: id })
-    console.log("HATEL", buscaHotel)
     const aumentaReservacion = await Hotel.findByIdAndUpdate(buscaHotel._id, { reservaciones: buscaHotel.reservaciones + 1 })
     const clienteAdd = await Hotel.findByIdAndUpdate(buscaHotel._id, { $push: { clientes: idUsuario } });
-    console.log("CLIENTE", clienteAdd);
     clienteAdd.save();
-    
     res.status(201).json(agregaHabitacion)
 }
 
 const agregarServicio = async (req, res) => {
     const idUsuario = req.usuario.id;
-    console.log("ID", idUsuario);
     const { id } = req.params;
     const idReservacion = await Reservacion.findOne({ usuario: idUsuario })
-    console.log("RESERVACION", idReservacion)
     const agregaServicio = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { servicios: [id] } }, {new: true})
     let totalS = parseFloat(0);
     for (let i = 0; i < agregaServicio.servicios.length; i++) {
         const servicioPrecio = await Servicio.findById(agregaServicio.servicios[i])
-        console.log('SERVICIO', servicioPrecio)
         totalS = + servicioPrecio.precio 
-        console.log("PRECIO" , servicioPrecio.precio)
-        console.log("TOTAL Servicios ", totalS)
     }
 
     const actualizarPrecio = await Reservacion.findByIdAndUpdate(idReservacion._id, { $inc: { total: parseFloat(totalS) } })
@@ -115,18 +105,13 @@ const agregarServicio = async (req, res) => {
 
 const agregarEvento = async (req, res) => {
     const idUsuario = req.usuario.id;
-    console.log("ID", idUsuario);
     const { id } = req.params;
     const idReservacion = await Reservacion.findOne({ usuario: idUsuario })
     const agregarEvento = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { eventos: [id] } }, {new: true})
-    console.log("AGREGAR EVENTO", agregarEvento)
     let totalE = 0;
     for (let i = 0; i < agregarEvento.eventos.length; i++) {
         const eventoPrecio = await Evento.findById(agregarEvento.eventos[i])
-        console.log('Evento', eventoPrecio)
         totalE = + eventoPrecio.precio 
-        console.log("PRECIO" , eventoPrecio.precio)
-        console.log("TOTAL Servicios ", totalE)
     }
 
     const actualizarPrecio = await Reservacion.findByIdAndUpdate(idReservacion._id, { $inc: { total: parseFloat(totalE) } })
@@ -144,7 +129,6 @@ const deleteHabitacion = async (req = request, res = response) => {
       }
       const idReserva = await Reservacion.findOne({ usuario: idUsuario });
       let dias = idReserva.dias_habitaciones;
-      console.log(dias);
       totalH = parseFloat(habitacion.costo) * parseFloat(dias);
       const eliminarRegistro = await Reservacion.findByIdAndUpdate(
         idReserva._id.toString(),
@@ -204,7 +188,6 @@ const postReservacion = async (req = request, res = response) => {
     if (diasFechas < 0) {
         diasFechas = diasFechas * -1
     }
-    console.log('DIAS ', diasFechas)
     let totalH = 0;
     let totalE = 0;
     let totalS = 0;
@@ -215,7 +198,6 @@ const postReservacion = async (req = request, res = response) => {
     // VALIDACION
     if (habitaciones) {
         hotelId = await Habitacion.findById(habitaciones[0]);
-        console.log('HOTEL',hotelId)
         let valorRepetido;
         for (let i = 0; i < habitaciones.length; i++) {
             for (let j = i + 1; j < habitaciones.length; j++) {
@@ -333,7 +315,6 @@ const postReservacion = async (req = request, res = response) => {
             hotel: hotelId.hotel
         });
         const reservacionUsuario = await Usuario.findByIdAndUpdate(id, { $push: { reservacion: [reservar._id] } })
-        console.log('Reserva user ', reservacionUsuario)
         await reservar.save();
         res.status(201).json(reservar);
     } else {
@@ -345,8 +326,6 @@ const postReservacion = async (req = request, res = response) => {
 const postReservacionUsuario = async (req = request, res = response) => {
     const id = req.usuario.id
     const reservacionEditada = req.body
-    console.log("ENVIO DEL FRONT ", reservacionEditada)
-    console.log("ENVIO DEL FRONT ", reservacionEditada.fechaInicio.fechaInicio)
 
     const fechaInicio2 = new Date(reservacionEditada.fechaInicio.fechaInicio);
     const fechaFinal2 = new Date(reservacionEditada.fechaInicio.fechaFinal);
@@ -355,9 +334,7 @@ const postReservacionUsuario = async (req = request, res = response) => {
     if (diasFechas < 0) {
         diasFechas = diasFechas * -1
     }
-    console.log("DIAS",diasFechas)
     const reservaciones = await Reservacion.find({ usuario: id })
-    console.log('RESERVACIONES', reservaciones)
     let totalH = 0;
     let totalDias = 0;
     let totalFinal = 0;
@@ -365,12 +342,8 @@ const postReservacionUsuario = async (req = request, res = response) => {
         totalDias = + diasFechas
         const habitacionPrecio = await Habitacion.findById(reservaciones[0].habitaciones[i])
         totalH = + habitacionPrecio.costo * totalDias
-        console.log("PRECIO" , habitacionPrecio.costo)
         totalFinal =+ totalH
-        console.log("TOTAL HABITACIONES ", totalH)
-        console.log("TOTAL TOTAL ", totalFinal)
     }
-    console.log('ID', reservaciones._id)
     const actualizaReservacion = await Reservacion.findByIdAndUpdate(reservaciones[0]._id, {
         fechaInicio: reservacionEditada.fechaInicio.fechaInicio,
         fechaFinal: reservacionEditada.fechaInicio.fechaFinal,
@@ -378,7 +351,6 @@ const postReservacionUsuario = async (req = request, res = response) => {
         cantidadPersonas: reservacionEditada.fechaInicio.cantidadPersonas,
         total: totalFinal
     },{new: true})
-    console.log(actualizaReservacion)
     res.status(201).json(actualizaReservacion)
 
 }
@@ -393,7 +365,6 @@ const putReservacion = async (req = request, res = response) => {
     if (diasFechas < 0) {
         diasFechas = diasFechas * -1
     }
-    console.log('DIAS ', diasFechas)
     let totalH = 0;
     let totalE = 0;
     let totalS = 0;
@@ -403,7 +374,6 @@ const putReservacion = async (req = request, res = response) => {
     let hotelId = null;
     if (habitaciones) {
         hotelId = await Habitacion.findById(habitaciones[0]);
-        console.log('HOTEL', hotelId)
         let valorRepetido;
         for (let i = 0; i < habitaciones.length; i++) {
             for (let j = i + 1; j < habitaciones.length; j++) {
@@ -539,7 +509,6 @@ const putMiReservacion = async (req = request, res = response) => {
     if (diasFechas < 0) {
         diasFechas = diasFechas * -1
     }
-    console.log('DIAS ', diasFechas)
     let totalH = 0;
     let totalE = 0;
     let totalS = 0;
@@ -548,7 +517,6 @@ const putMiReservacion = async (req = request, res = response) => {
     let todoBien = true;
     if (habitaciones) {
         const hotelId = await Habitacion.findById(habitaciones[0]);
-        console.log('HOTEL', hotelId)
         let valorRepetido;
         for (let i = 0; i < habitaciones.length; i++) {
             for (let j = i + 1; j < habitaciones.length; j++) {
@@ -680,11 +648,8 @@ const putMiReservacion = async (req = request, res = response) => {
 }
 
 const deleteReservacion = async (req = request, res = response) => {
-    console.log("Entre");
     const { id } = req.params;
-    console.log(id);
     const reservacionCancelada = await Reservacion.findOne({ usuario: id });
-    console.log(reservacionCancelada);
     if (reservacionCancelada != null) {
         const habitacionesIds = reservacionCancelada.habitaciones.map(habitacion => habitacion._id);
     

@@ -11,13 +11,11 @@ const getEventos = async (req = request, res = response) => {
 const getEventosId = async (req = request, res = response) => {
   const {id} = req.params;
   const eventoId = await Evento.findOne({_id: id})
-  console.log(eventoId)
   res.status(201).json(eventoId);
 };
 
 const postEvento = async (req = request, res = response) => {
   const id = req.usuario.id;
-  console.log("ENTRE")
   const { nombre, fechaInicio, fechaFinal, descripcion, tipo, precio, hotel, img } = req.body;
 
   const buscar = await Evento.findOne({nombre: nombre})
