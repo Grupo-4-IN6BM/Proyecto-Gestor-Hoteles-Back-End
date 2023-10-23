@@ -27,7 +27,8 @@ const HotelSchema = Schema({
     }],
     administrador:{
         type: Schema.Types.ObjectId,
-        ref: 'Usuario', 
+        ref: 'Usuario',
+        def: "" 
     },
     trabajadores :[{
         type: Schema.Types.ObjectId,
