@@ -5,7 +5,7 @@ const Servicio = require("../models/servicio");
 const Hotel = require("../models/hotel");
 
 const getServicio = async (req = request, res = response) => {
-  const servicioId = await Servicio.find({estado: true})
+  const servicioId = await Servicio.find({estado: true}).populate('hotel')
   res.status(201).json({
     servicioId
   });
