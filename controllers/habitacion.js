@@ -64,7 +64,8 @@ const postHabitacionSuperAdmin = async (req = request, res = response) => {
         hotel: habitacionAgregada.hotel, 
         descripcion: habitacionAgregada.descripcion, 
         capacidad: habitacionAgregada.cantidad_personas,
-        tipo: habitacionAgregada.tipo_habitacion});
+        tipo: habitacionAgregada.tipo_habitacion,
+        img: habitacionAgregada.img});
    
     await habitacionGuardadaDB.save();
     
