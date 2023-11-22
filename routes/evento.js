@@ -22,7 +22,6 @@ router.post('/registrarEvento', [
     check('fechaFinal', ' Ingresa una fecha final valida').custom(esFecha),
     check('descripcion', ' descripcion es obligatorio').not().isEmpty(),
     check('precio', ' precio es obligatorio').not().isEmpty(),
-    check('tipo').custom(esTipoValido),
     validarCampos,
 
 ] ,postEvento);
@@ -38,7 +37,6 @@ router.put('/editarEvento/:id', [
     check('descripcion', ' descripcion es obligatorio').not().isEmpty(),
     check('precio', ' precio es obligatorio').not().isEmpty(),
     check('id', 'No es un ID válido').isMongoId(),
-    check('tipo').custom(esTipoValido),
     validarCampos,
 ] ,putEvento);
 
