@@ -347,14 +347,14 @@ const postReservacionUsuario = async (req = request, res = response) => {
     if (diasFechas < 0) {
         diasFechas = diasFechas * -1
     }
-    const reservaciones = await Reservacion.find({ usuario: id })
+    const reservaciones = await Reservacion.findOne({ usuario: id })
     let totalH = 0;
     let totalDias = 0;
     let totalFinal = 0;
-    for (let i = 0; i < reservaciones[0].habitaciones.length; i++) {
-        totalDias = + diasFechas
+    for (let i = 0; i < reservaciones.habitaciones.length; i++) {
+        totalDias =+ diasFechas
         const habitacionPrecio = await Habitacion.findById(reservaciones[0].habitaciones[i])
-        totalH = + habitacionPrecio.costo * totalDias
+        totalH =+ habitacionPrecio.costo * totalDias
         totalFinal =+ totalH
     }
     const actualizaReservacion = await Reservacion.findByIdAndUpdate(reservaciones[0]._id, {
