@@ -160,6 +160,12 @@ const deleteHabitacion = async (req = request, res = response) => {
       { $pull: { servicios: id }, $inc: { total: -totalS } },
       { new: true }
     );
+    const cambioEstadoServicio = await Servicio.findByIdAndUpdate(
+        id,
+        { estado: true },
+        { new: true }
+      );
+      await cambioEstadoServicio.save();
     res.status(201).json(eliminarServicio);
   };
   
@@ -175,8 +181,14 @@ const deleteHabitacion = async (req = request, res = response) => {
       { $pull: { eventos: id }, $inc: { total: -totalE } },
       { new: true }
     );
+    const cambioEstadoEvento = await Evento.findByIdAndUpdate(
+        id,
+        { disponibilidad: true },
+        { new: true }
+      );
+      await cambioEstadoEvento.save();
     res.status(201).json(eliminarServicio);
-  };
+    };
 
 
 const postReservacion = async (req = request, res = response) => {
