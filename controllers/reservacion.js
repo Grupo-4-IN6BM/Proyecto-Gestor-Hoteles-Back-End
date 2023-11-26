@@ -337,6 +337,7 @@ const postReservacion = async (req = request, res = response) => {
 }
 
 const postReservacionUsuario = async (req = request, res = response) => {
+    try {
     const id = req.usuario.id
     const reservacionEditada = req.body
 
@@ -359,7 +360,7 @@ const postReservacionUsuario = async (req = request, res = response) => {
         totalH =+ habitacionPrecio.costo * totalDias
         totalFinal =+ totalH
         }else{
-            return;
+           return
         }
     }
     const actualizaReservacion = await Reservacion.findByIdAndUpdate(reservaciones[0]._id, {
@@ -370,7 +371,9 @@ const postReservacionUsuario = async (req = request, res = response) => {
         total: totalFinal
     },{new: true})
     res.status(201).json(actualizaReservacion)
-
+} catch (error) {
+    res.status(404).json(error);
+}
 }
 
 const putReservacion = async (req = request, res = response) => {
