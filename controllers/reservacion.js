@@ -140,6 +140,7 @@ const deleteHabitacion = async (req = request, res = response) => {
         { disponibilidad: true },
         { new: true }
       );
+      cambioEstadoHabitacion.save();
       res.status(201).json(eliminarRegistro);
     } catch (error) {
       console.log(error);
