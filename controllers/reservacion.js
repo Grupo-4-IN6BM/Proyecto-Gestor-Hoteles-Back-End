@@ -347,6 +347,7 @@ const postReservacionUsuario = async (req = request, res = response) => {
     if (diasFechas < 0) {
         diasFechas = diasFechas * -1
     }
+    
     const reservaciones = await Reservacion.findOne({ usuario: id })
     let totalH = 0;
     let totalDias = 0;
