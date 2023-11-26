@@ -135,12 +135,12 @@ const deleteHabitacion = async (req = request, res = response) => {
         { $pull: { habitaciones: id }, $inc: { total: -parseFloat(totalH) } },
         { new: true }
       );
-      const cambioEstadoHabitacion = Habitacion.findByIdAndUpdate(
+      const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(
         id,
         { disponibilidad: true },
         { new: true }
       );
-      cambioEstadoHabitacion.save();
+      await cambioEstadoHabitacion.save();
       res.status(201).json(eliminarRegistro);
     } catch (error) {
       console.log(error);
