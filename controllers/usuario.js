@@ -63,7 +63,7 @@ const postUserAdmin = async (req = request, res = response) => {
 const postUsuarioSuperAdmin = async (req = request, res = response) => {
     const { nombre, edad, correo, password, identificacion, img } = req.body;
 
-    const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, img, rol });
+    const usuarioGuardadoDB = new Usuario({ nombre, edad, correo, password, identificacion, img });
     const salt = bcrypt.genSaltSync();
     usuarioGuardadoDB.password = bcrypt.hashSync(password, salt);
     const reservacionAuto = new Reservacion({ usuario: usuarioGuardadoDB._id })
