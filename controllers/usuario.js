@@ -6,8 +6,9 @@ const jwt = require('jsonwebtoken');
 const Role = require('../models/role');
 
 const getUsuarios = async (req = request, res = response) => {
-    const id = req.usuario.id;
-    const listaUsuarios = await Usuario.find({ _id: { $ne: id }, estado: true });
+    // const id = req.usuario.id;
+    // const listaUsuarios = await Usuario.find({ _id: { $ne: id }, estado: true });
+    const listaUsuarios = await Usuario.find();
     res.status(200).json(listaUsuarios);
   };
 
