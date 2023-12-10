@@ -38,14 +38,14 @@ router.post('/addAdmin', [
 ] ,postUserAdmin);
 
 router.post('/agregarSuperAdmin', [
-    // check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    // check('edad', 'La edad es Obligatoria').not().isEmpty(),
-    // check('password', 'El password debe de ser más de 6 digitos').isLength( { min: 6 } ),
-    // check('correo', 'El correo no es valido').isEmail(),
-    // check('correo').custom(emailExiste ),
-    // check('identificacion', 'La identificacion es obligatoria').not().isEmpty(),
-    // check('identificacion').custom(identificacionExiste),
-    // validarCampos,
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('edad', 'La edad es Obligatoria').not().isEmpty(),
+    check('password', 'El password debe de ser más de 6 digitos').isLength( { min: 6 } ),
+    check('correo', 'El correo no es valido').isEmail(),
+    check('correo').custom(emailExiste ),
+    check('identificacion', 'La identificacion es obligatoria').not().isEmpty(),
+    check('identificacion').custom(identificacionExiste),
+    validarCampos,
 ] ,postUsuarioSuperAdmin);
 
 router.put('/editarMiUsuario', [
