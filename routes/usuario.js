@@ -9,8 +9,8 @@ const { tieneRole } = require('../middlewares/validar-roles');
 const router = Router();
 
 router.get('/mostrar',[
-    validarJWT,
-    validarCampos
+    // validarJWT,
+    // validarCampos
 ], getUsuarios);
 
 router.get('/mostrar/:token', getUsuarioPorToken);
@@ -57,8 +57,8 @@ router.put('/editarMiUsuario', [
 //     validarCampos
 // ] ,putUsuario);
 router.put('/editar/:id', [
-    validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
+    // validarJWT,
+    // tieneRole('ROL_ADMINISTRATIVO'),
     check('id', 'No es un id de Mongo Válido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
@@ -74,8 +74,8 @@ router.put('/editarSuperAdmin/:id', [
 ] ,putUsuarioSuperAdmin);
 
 router.delete('/eliminar/:id', [
-    validarJWT,
-    tieneRole('ROL_ADMINISTRATIVO'),
+    // validarJWT,
+    // tieneRole('ROL_ADMINISTRATIVO'),
     check('id', 'No es un id de Mongo Válido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
     validarCampos
