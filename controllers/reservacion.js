@@ -336,45 +336,62 @@ const postReservacion = async (req = request, res = response) => {
 
 }
 
-const postReservacionUsuario = async (req = request, res = response) => {
+const postReservacionUsuario = async (req, res) => {
     try {
-    const id = req.usuario.id
-    const reservacionEditada = req.body
-
-    const fechaInicio2 = new Date(reservacionEditada.fechaInicio);
-    const fechaFinal2 = new Date(reservacionEditada.fechaFinal);
-    const diferenciaFechas = fechaFinal2 - fechaInicio2;
-    let diasFechas = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
-    if (diasFechas < 0) {
-        diasFechas = diasFechas * -1
-    }
-
-    const reservaciones = await Reservacion.findOne({ usuario: id })
-    let totalH = 0;
-    let totalDias = 0;
-    let totalFinal = 0;
-    for (let i = 0; i < reservaciones.habitaciones.length; i++) {
-        totalDias =+ diasFechas
-        const habitacionPrecio = await Habitacion.findById(reservaciones.habitaciones[i])
+      const id = req.usuario.id;
+      const reservacionEditada = req.body;
+  
+      const fechaInicio2 = new Date(reservacionEditada.fechaInicio);
+      const fechaFinal2 = new Date(reservacionEditada.fechaFinal);
+      const diferenciaFechas = fechaFinal2 - fechaInicio2;
+      let diasFechas = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
+      
+      // Validar fechas negativas
+      if (diasFechas < 0) {
+        return res.status(400).json({ error: 'La fecha de inicio no puede ser posterior a la fecha final.' });
+      }
+  
+      const reservaciones = await Reservacion.findOne({ usuario: id });
+      
+      if (!reservaciones) {
+        return res.status(404).json({ error: 'No se encontraron reservaciones para este usuario.' });
+      }
+  
+      let totalH = 0;
+      let totalDias = 0;
+      let totalFinal = 0;
+  
+      for (let i = 0; i < reservaciones.habitaciones.length; i++) {
+        totalDias += diasFechas;
+        const habitacionPrecio = await Habitacion.findById(reservaciones.habitaciones[i]);
+  
         if (habitacionPrecio) {
-        totalH =+ habitacionPrecio.costo * totalDias
-        totalFinal =+ totalH
-        }else{
-           return
+          totalH += habitacionPrecio.costo * totalDias;
+          totalFinal += totalH;
+        } else {
+          return res.status(404).json({ error: 'No se encontró información de precio para una habitación.' });
         }
+      }
+  
+      const actualizaReservacion = await Reservacion.findByIdAndUpdate(
+        reservaciones._id,
+        {
+          fechaInicio: reservacionEditada.fechaInicio,
+          fechaFinal: reservacionEditada.fechaFinal,
+          dias_habitaciones: diasFechas,
+          cantidadPersonas: reservacionEditada.cantidadPersonas,
+          total: totalFinal
+        },
+        { new: true }
+      );
+  
+      res.status(201).json(actualizaReservacion);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Hubo un error en el servidor.' });
     }
-    const actualizaReservacion = await Reservacion.findByIdAndUpdate(reservaciones[0]._id, {
-        fechaInicio: reservacionEditada.fechaInicio,
-        fechaFinal: reservacionEditada.fechaFinal,
-        dias_habitaciones: diasFechas,
-        cantidadPersonas: reservacionEditada.cantidadPersonas,
-        total: totalFinal
-    },{new: true})
-    res.status(201).json(actualizaReservacion)
-} catch (error) {
-    res.status(404).json(error);
-}
-}
+  };
+  
 
 const putReservacion = async (req = request, res = response) => {
     const id = req.params;
