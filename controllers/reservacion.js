@@ -341,8 +341,8 @@ const postReservacionUsuario = async (req = request, res = response) => {
     const id = req.usuario.id
     const reservacionEditada = req.body
 
-    const fechaInicio2 = new Date(reservacionEditada.fechaInicio.fechaInicio);
-    const fechaFinal2 = new Date(reservacionEditada.fechaInicio.fechaFinal);
+    const fechaInicio2 = new Date(reservacionEditada.fechaInicio);
+    const fechaFinal2 = new Date(reservacionEditada.fechaFinal);
     const diferenciaFechas = fechaFinal2 - fechaInicio2;
     let diasFechas = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
     if (diasFechas < 0) {
@@ -364,15 +364,15 @@ const postReservacionUsuario = async (req = request, res = response) => {
         }
     }
     const actualizaReservacion = await Reservacion.findByIdAndUpdate(reservaciones[0]._id, {
-        fechaInicio: reservacionEditada.fechaInicio.fechaInicio,
-        fechaFinal: reservacionEditada.fechaInicio.fechaFinal,
+        fechaInicio: reservacionEditada.fechaInicio,
+        fechaFinal: reservacionEditada.fechaFinal,
         dias_habitaciones: diasFechas,
-        cantidadPersonas: reservacionEditada.fechaInicio.cantidadPersonas,
+        cantidadPersonas: reservacionEditada.cantidadPersonas,
         total: totalFinal
     },{new: true})
     res.status(201).json(actualizaReservacion)
 } catch (error) {
-    res.status(404).json(error, reservacionEditada);
+    res.status(404).json(error);
 }
 }
 
