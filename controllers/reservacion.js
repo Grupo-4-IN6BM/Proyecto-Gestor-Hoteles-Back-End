@@ -372,7 +372,7 @@ const postReservacionUsuario = async (req = request, res = response) => {
     },{new: true})
     res.status(201).json(actualizaReservacion)
 } catch (error) {
-    res.status(404).json(error);
+    res.status(404).json({error, reservacionEditada});
 }
 }
 
