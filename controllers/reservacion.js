@@ -388,7 +388,7 @@ const postReservacionUsuario = async (req, res) => {
       res.status(201).json(actualizaReservacion);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Hubo un error en el servidor.' });
+      res.status(500).json({ error: 'Hubo un error en el servidor.', error });
     }
   };
   
