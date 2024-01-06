@@ -78,22 +78,22 @@ const agregarHabitacion = async (req, res) => {
     const idUsuario = req.usuario.id;
     const { id } = req.params;
     
-     // Obtener información del hotel de la habitación que se desea agregar
-     const habitacion = await Habitacion.findById(id);
-     const idHotelHabitacion = habitacion.hotel;
+    //  // Obtener información del hotel de la habitación que se desea agregar
+    //  const habitacion = await Habitacion.findById(id);
+    //  const idHotelHabitacion = habitacion.hotel;
  
-     // Obtener información del hotel al que pertenecen las habitaciones ya existentes en la reserva
-     const idReservacion = await Reservacion.findOne({ usuario: idUsuario });
-     const habitacionesEnReserva = idReservacion.habitaciones;
-     const primerHabitacionEnReserva = await Habitacion.findById(habitacionesEnReserva[0]);
-     const idHotelReserva = primerHabitacionEnReserva.hotel;
+    //  // Obtener información del hotel al que pertenecen las habitaciones ya existentes en la reserva
+    //  const idReservacion = await Reservacion.findOne({ usuario: idUsuario });
+    //  const habitacionesEnReserva = idReservacion.habitaciones;
+    //  const primerHabitacionEnReserva = await Habitacion.findById(habitacionesEnReserva[0]);
+    //  const idHotelReserva = primerHabitacionEnReserva.hotel;
  
-     // Comparar si ambos hoteles son el mismo
-     if(primerHabitacionEnReserva){
-     if (idHotelHabitacion.toString() !== idHotelReserva.toString()) {
-         return res.status(400).json({ error: "La habitación no pertenece al mismo hotel que las habitaciones existentes en la reserva." });
-     }
-    }
+    //  // Comparar si ambos hoteles son el mismo
+    //  if(primerHabitacionEnReserva){
+    //  if (idHotelHabitacion.toString() !== idHotelReserva.toString()) {
+    //      return res.status(400).json({ error: "La habitación no pertenece al mismo hotel que las habitaciones existentes en la reserva." });
+    //  }
+    // }
     const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { habitaciones: [id] } })
     const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(id, { disponibilidad: false })
     const buscaHotel = await Hotel.findOne({ habitaciones: id })
