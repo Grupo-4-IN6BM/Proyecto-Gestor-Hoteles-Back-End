@@ -77,7 +77,7 @@ const getReservacionPorId = async (req = request, res = response) => {
 const agregarHabitacion = async (req, res) => {
     const idUsuario = req.usuario.id;
     const { id } = req.params;
-    
+    const idReservacion = await Reservacion.findOne({ usuario: idUsuario })
     //  // Obtener información del hotel de la habitación que se desea agregar
     //  const habitacion = await Habitacion.findById(id);
     //  const idHotelHabitacion = habitacion.hotel;
