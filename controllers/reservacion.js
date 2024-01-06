@@ -89,9 +89,11 @@ const agregarHabitacion = async (req, res) => {
      const idHotelReserva = primerHabitacionEnReserva.hotel;
  
      // Comparar si ambos hoteles son el mismo
+     if(primerHabitacionEnReserva){
      if (idHotelHabitacion.toString() !== idHotelReserva.toString()) {
          return res.status(400).json({ error: "La habitación no pertenece al mismo hotel que las habitaciones existentes en la reserva." });
      }
+    }
     const agregaHabitacion = await Reservacion.findByIdAndUpdate(idReservacion._id, { $push: { habitaciones: [id] } })
     const cambioEstadoHabitacion = await Habitacion.findByIdAndUpdate(id, { disponibilidad: false })
     const buscaHotel = await Hotel.findOne({ habitaciones: id })
